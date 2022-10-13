@@ -5,6 +5,9 @@
 package ChessCommon_GUI;
 
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -12,8 +15,6 @@ import java.awt.event.ActionListener;
  */
 public class Login extends javax.swing.JPanel {
 
-//    private SignInUpPage sign = new SignInUpPage();
-//    private Register register = new Register();
     /**
      * Creates new form SignIn
      */
@@ -97,6 +98,11 @@ public class Login extends javax.swing.JPanel {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(btnBackToRegister)
+                            .addComponent(btnLogin))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(txtLoginPw, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -106,11 +112,7 @@ public class Login extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtLoginUser)
-                        .addContainerGap(46, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLogin)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addComponent(btnBackToRegister, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(46, Short.MAX_VALUE))))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnLogin, txtLoginPw, txtLoginUser});
@@ -120,7 +122,7 @@ public class Login extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jLabel1)
-                .addGap(50, 50, 50)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLoginUser, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,11 +130,11 @@ public class Login extends javax.swing.JPanel {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtLoginPw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
+                .addGap(48, 48, 48)
                 .addComponent(btnLogin)
-                .addGap(34, 34, 34)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBackToRegister)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLogin, txtLoginPw, txtLoginUser});
@@ -143,9 +145,30 @@ public class Login extends javax.swing.JPanel {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_btnBackToRegisterActionPerformed
-    
 
+    public JButton getBtnBackToRegister() {
+        return btnBackToRegister;
+    }
+
+    public JButton getBtnLogin() {
+        return btnLogin;
+    }
+
+    public JPasswordField getTxtLoginPw() {
+        return txtLoginPw;
+    }
+
+    public JTextField getTxtLoginUser() {
+        return txtLoginUser;
+    }
     
+    public void clearFields()
+    {
+        txtLoginUser.setText("");
+        txtLoginPw.setText("");
+    }
+    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackToRegister;

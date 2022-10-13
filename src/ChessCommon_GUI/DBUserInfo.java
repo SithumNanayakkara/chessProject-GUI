@@ -30,31 +30,33 @@ public class DBUserInfo {
     public void connectChessDB() {
         try {
             this.statement = conn.createStatement();
-            this.checkExistedTable("Chess_Players");
-            this.statement.addBatch("CREATE  TABLE Chess_Players (USERNAME VARCHAR(255), EMAIL VARCHAR(255), PASSWORD VARCHAR(255), SCORE INTEGER)");
-            this.statement.addBatch("INSERT INTO Chess_Players (USERNAME,EMAIL,PASSWORD,SCORE) VALUES"
-             + "('Sithum Nanayakkara', 'sithum@nanayakkara.com', 'sithum', 60)");
-            this.statement.executeBatch();
-            System.out.println("Chess_Players Table has been created with Sample data");
-            
+            if(!this.checkExistedTable("Chess_Players"))
+            {
+                this.statement.addBatch("CREATE  TABLE Chess_Players (USERNAME VARCHAR(255), EMAIL VARCHAR(255), PASSWORD VARCHAR(255), SCORE INTEGER)");
+                this.statement.addBatch("INSERT INTO Chess_Players (USERNAME,EMAIL,PASSWORD,SCORE) VALUES"
+                 + "('Sithum Nanayakkara', 'sithum_nanayakkara@outlook.com', 'sithum', 60)");
+                this.statement.executeBatch();
+                System.out.println("Chess_Players Table has been created with Sample data");
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
     
-    public void checkExistedTable(String name) {
+    public boolean checkExistedTable(String name) {
+        boolean tableAlreadyExists = false;
         try {
             DatabaseMetaData dbmd = this.conn.getMetaData();
             String[] types = {"TABLE"};
             statement = this.conn.createStatement();
-            ResultSet rs = dbmd.getTables(null, null, null, types);
+            ResultSet rs = dbmd.getTables(null, null, null, null);
 
             while (rs.next()) {
                 String table_name = rs.getString("TABLE_NAME");
-                System.out.println(table_name);
+                //System.out.println(table_name);
                 if (table_name.equalsIgnoreCase(name)) {
-                    statement.executeUpdate("Drop table " + name);
-                    System.out.println("Table " + name + " has been deleted.");
+                    System.out.println("Table already Exists!");
+                    tableAlreadyExists = true;
                     break;
                 }
             }
@@ -62,6 +64,8 @@ public class DBUserInfo {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        
+        return tableAlreadyExists;
     }
 
     public void closeConnection() {

@@ -5,6 +5,8 @@
 package ChessCommon_GUI;
 
 import java.awt.event.ActionListener;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -24,9 +26,14 @@ public class Register extends javax.swing.JPanel {
         txtRegisterUser.grabFocus();
     }
     
-    public void addEventLogin(ActionListener event)
+    public void addEventBackToLogin(ActionListener event)
     {
         btnBackToLogin.addActionListener(event);
+    }
+    
+    public void addEventRegister(ActionListener event)
+    {
+        btnRegister.addActionListener(event);
     }
 
     /**
@@ -66,7 +73,6 @@ public class Register extends javax.swing.JPanel {
         jLabel3.setText("Password");
 
         txtRegisterPw.setBackground(new java.awt.Color(204, 255, 255));
-        txtRegisterPw.setText("jPasswordField1");
         txtRegisterPw.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
 
         btnRegister.setBackground(new java.awt.Color(0, 102, 102));
@@ -162,6 +168,19 @@ public class Register extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    public JTextField getTxtRegisterEmail() {
+        return txtRegisterEmail;
+    }
+
+    public JPasswordField getTxtRegisterPw() {
+        return txtRegisterPw;
+    }
+
+    public JTextField getTxtRegisterUser() {
+        return txtRegisterUser;
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackToLogin;

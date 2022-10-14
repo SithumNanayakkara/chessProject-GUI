@@ -29,9 +29,14 @@ public class Login extends javax.swing.JPanel {
         registerPage = false;
     }
     
-    public void addEventRegister(ActionListener event)
+    public void addEventBackToRegister(ActionListener event)
     {
         btnBackToRegister.addActionListener(event);
+    }
+    
+    public void addEventLogin(ActionListener event)
+    {
+         btnLogin.addActionListener(event);
     }
   
     /**
@@ -69,7 +74,6 @@ public class Login extends javax.swing.JPanel {
         jLabel3.setText("Password");
 
         txtLoginPw.setBackground(new java.awt.Color(204, 255, 255));
-        txtLoginPw.setText("jPasswordField1");
         txtLoginPw.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
 
         btnLogin.setBackground(new java.awt.Color(0, 102, 102));

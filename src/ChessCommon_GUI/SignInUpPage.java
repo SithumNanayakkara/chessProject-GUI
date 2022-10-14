@@ -6,6 +6,7 @@ package ChessCommon_GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,17 +15,23 @@ import java.awt.event.ActionListener;
 public class SignInUpPage extends javax.swing.JFrame {
     
     
-    
-    private static Register register = new Register();
-    private static Login login = new Login();
+    // private final 
+    private final Register register = new Register();
+    private final Login login = new Login();
+    private DBUserInfo DBUser;
+    private boolean success;
     
 
     /**
      * Creates new form SignInUpPage
      */
-    public SignInUpPage() {
+    public SignInUpPage(DBUserInfo DB) {
         initComponents();
         myInitComponents();
+        eventHandler();
+        this.setVisible(true);
+        this.DBUser = DB;
+        this.success = false;
     }
         @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -119,26 +126,10 @@ public class SignInUpPage extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignInUpPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignInUpPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignInUpPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignInUpPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
+    public void eventHandler() {
                 
         //actions to show register form
-        login.addEventRegister(new ActionListener() {
+        login.addEventBackToRegister(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 //  Show register form
@@ -153,7 +144,7 @@ public class SignInUpPage extends javax.swing.JFrame {
             }
         });
         //actions to go back to login form
-        register.addEventLogin(new ActionListener() {
+        register.addEventBackToLogin(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 //  Show register form
@@ -167,27 +158,76 @@ public class SignInUpPage extends javax.swing.JFrame {
                 login.setSize(340, 502);
             }
         });
-
-        //Create and display the form
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() { 
-                new SignInUpPage().setVisible(true);
+        
+        login.addEventLogin(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+                String userName = login.getTxtLoginUser().getText();
+                String password = login.getTxtLoginPw().getText();
+                if(!userName.equals("") || !password.equals(""))
+                {
+                    if(DBUser.loginUser(userName, password))
+                    {
+                        success = true;
+                        System.out.println("Login Successful");
+                    }
+                    else 
+                    {
+                        login.clearFields();
+                        System.out.println("Login Failed");
+                        JOptionPane.showMessageDialog(jPanel2,"Invalid credentials, please try again or get registered","error",JOptionPane.PLAIN_MESSAGE);
+                    } 
+                }
+                else
+                {
+                    System.out.println("Username or Password field empty");
+                    JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
+                }
             }
-        });    
+        });
         
-        //starting DB        
-        DBUserInfo DBUser = new DBUserInfo();
-        DBUser.connectChessDB();
-        DBUser.closeConnection();
-        
+        register.addEventRegister(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+                String userName = register.getTxtRegisterUser().getText();
+                String password = register.getTxtRegisterPw().getText();
+                String email = register.getTxtRegisterEmail().getText();
+                
+                if(!userName.equals("") || !password.equals("") || !email.equals(""))
+                {
+                    if(DBUser.registerUser(userName,email,password))
+                    {
+                        System.out.println("Register Successful");
+                    }
+                    else 
+                    {
+                        System.out.println("Register Failed");
+                        JOptionPane.showMessageDialog(jPanel2,userName +"already exists, please try again or login","error",JOptionPane.PLAIN_MESSAGE);
+                    }
+                }
+                else
+                {
+                    System.out.println("Username, Password, Email field empty");
+                    JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
+                }
+            }
+        });
         
     }
+
+    public boolean isSuccess() {
+        return success;
+    }
+    
+     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private static javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel2;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;

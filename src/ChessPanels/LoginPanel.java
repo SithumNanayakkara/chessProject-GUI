@@ -2,7 +2,7 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessCommon_GUI;
+package ChessPanels;
 
 import java.awt.event.ActionListener;
 import javax.swing.JButton;

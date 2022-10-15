@@ -2,7 +2,7 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessCommon_GUI;
+package ChessDataBase;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -2,8 +2,9 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessCommon_GUI;
+package ChessDataBase;
 
+import ChessDataBase.DBConnection;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;

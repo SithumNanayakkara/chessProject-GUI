@@ -2,7 +2,10 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessCommon_GUI;
+package ChessCommon;
+
+import ChessDataBase.DBUserInfo;
+import ChessPanels.MainForm;
 
 /**
  *

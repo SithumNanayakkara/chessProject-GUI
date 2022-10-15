@@ -2,7 +2,11 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessCommon_GUI;
+package ChessPanels;
+
+import ChessDataBase.DBUserInfo;
+import ChessPanels.RegisterPanel;
+import ChessPanels.LoginPanel;
 
 /**
  *

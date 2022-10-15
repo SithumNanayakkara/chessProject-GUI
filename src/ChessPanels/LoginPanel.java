@@ -15,30 +15,22 @@ import javax.swing.JTextField;
  */
 public class LoginPanel extends javax.swing.JPanel {
 
+    private final SwitchLoginRegisterPanel switchPanel;
+    boolean registerPage;
+    
     /**
      * Creates new panel SignIn
      */
-    boolean registerPage;
-    
-    public LoginPanel() 
+    public LoginPanel(SwitchLoginRegisterPanel panel) 
     {
         initComponents();
+        this.switchPanel = panel;
         registerPage = false;
     }
     
     public void Login()
     {
         txtLoginUser.grabFocus();
-    }
-    
-    public void addEventBackToRegister(ActionListener event)
-    {
-        btnBackToRegister.addActionListener(event);
-    }
-    
-    public void addEventLogin(ActionListener event)
-    {
-         btnLogin.addActionListener(event);
     }
  
     @SuppressWarnings("unchecked")
@@ -78,12 +70,22 @@ public class LoginPanel extends javax.swing.JPanel {
         btnLogin.setBorder(null);
         btnLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogin.setDefaultCapable(false);
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         btnBackToRegister.setForeground(new java.awt.Color(0, 255, 255));
         btnBackToRegister.setText("Not already registered? Register Now");
         btnBackToRegister.setBorder(null);
         btnBackToRegister.setContentAreaFilled(false);
         btnBackToRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackToRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackToRegisterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,6 +138,15 @@ public class LoginPanel extends javax.swing.JPanel {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnLogin, txtLoginPw, txtLoginUser});
 
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        switchPanel.doLogin();
+        
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnBackToRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToRegisterActionPerformed
+        switchPanel.showRegisterCard();
+    }//GEN-LAST:event_btnBackToRegisterActionPerformed
 
     public JPasswordField getTxtLoginPw() {
         return txtLoginPw;

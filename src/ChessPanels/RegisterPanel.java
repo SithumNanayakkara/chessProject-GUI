@@ -14,27 +14,20 @@ import javax.swing.JTextField;
  */
 public class RegisterPanel extends javax.swing.JPanel {
 
+    private final SwitchLoginRegisterPanel panel;
     /**
      * Creates new form SignIn
      */
-    public RegisterPanel() 
+    public RegisterPanel(SwitchLoginRegisterPanel switchPanel) 
     {
         initComponents();
+        this.panel = switchPanel;
+        register();
     }
     
-    public void Register()
+    public void register()
     {
         txtRegisterUser.grabFocus();
-    }
-    
-    public void addEventBackToLogin(ActionListener event)
-    {
-        btnBackToLogin.addActionListener(event);
-    }
-    
-    public void addEventRegister(ActionListener event)
-    {
-        btnRegister.addActionListener(event);
     }
     
     @SuppressWarnings("unchecked")
@@ -75,12 +68,22 @@ public class RegisterPanel extends javax.swing.JPanel {
         btnRegister.setText("Register");
         btnRegister.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
         btnRegister.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         btnBackToLogin.setForeground(new java.awt.Color(0, 255, 255));
         btnBackToLogin.setText("Go back to Login");
         btnBackToLogin.setBorder(null);
         btnBackToLogin.setContentAreaFilled(false);
         btnBackToLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBackToLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackToLoginActionPerformed(evt);
+            }
+        });
 
         txtRegisterEmail.setBackground(new java.awt.Color(204, 255, 255));
         txtRegisterEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
@@ -146,6 +149,15 @@ public class RegisterPanel extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToLoginActionPerformed
+        // TODO add your handling code here:
+        panel.showLoginCard();
+    }//GEN-LAST:event_btnBackToLoginActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        panel.doRegister();
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
     public JTextField getTxtRegisterEmail() {
         return txtRegisterEmail;
     }
@@ -158,8 +170,6 @@ public class RegisterPanel extends javax.swing.JPanel {
         return txtRegisterUser;
     }
     
-    
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBackToLogin;
     private javax.swing.JButton btnRegister;

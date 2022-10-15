@@ -34,7 +34,12 @@ public class MainForm extends javax.swing.JFrame {
         this.userName = "";
     }
     
-    public void switchCards ()
+    
+    public void card1 ()
+    {
+        cardLayout.show(jPanel1,"1");
+    }
+    public void card2 ()
     {
         cardLayout.show(jPanel1,"2");
     }

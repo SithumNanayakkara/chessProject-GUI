@@ -4,6 +4,7 @@
  */
 package ChessPanels;
 
+import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
 /**
@@ -28,6 +29,30 @@ public class MenuPanel extends javax.swing.JPanel {
         lblWelcome.setText("Hi "+ name + "!");
     }
 
+    public void addEventExit(ActionListener event)
+    {
+        btnExit.addActionListener(event);
+    }
+    
+    public void addEventLogout(ActionListener event)
+    {
+        btnLogout.addActionListener(event);
+    }
+    
+    public void addEventNewGame(ActionListener event)
+    {
+        btnNewGame.addActionListener(event);
+    }
+    
+    public void addEventRules(ActionListener event)
+    {
+        btnRules.addActionListener(event);
+    }
+    
+    public void addEventLoadGame(ActionListener event)
+    {
+        btnLoadGame.addActionListener(event);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -83,6 +108,11 @@ public class MenuPanel extends javax.swing.JPanel {
         btnLogout.setBorderPainted(false);
         btnLogout.setContentAreaFilled(false);
         btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
 
         btnExit.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         btnExit.setForeground(new java.awt.Color(204, 255, 255));
@@ -100,16 +130,12 @@ public class MenuPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnLoadGame)
-                        .addContainerGap(991, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnExit)
-                            .addComponent(btnNewGame)
-                            .addComponent(btnRules)
-                            .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(btnLoadGame)
+                    .addComponent(btnExit)
+                    .addComponent(btnNewGame)
+                    .addComponent(btnRules)
+                    .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(580, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout)
@@ -133,6 +159,11 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addGap(50, 50, 50))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // TODO add your handling code here:
+        form.card1();
+    }//GEN-LAST:event_btnLogoutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

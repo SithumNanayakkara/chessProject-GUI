@@ -149,6 +149,9 @@
         </Property>
         <Property name="defaultCapable" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnBackToRegister">
       <Properties>
@@ -164,6 +167,9 @@
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackToRegisterActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

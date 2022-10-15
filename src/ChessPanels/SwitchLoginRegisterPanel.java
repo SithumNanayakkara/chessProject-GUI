@@ -7,6 +7,7 @@ package ChessPanels;
 import ChessDataBase.DBUserInfo;
 import ChessPanels.RegisterPanel;
 import ChessPanels.LoginPanel;
+import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -17,32 +18,28 @@ import javax.swing.JOptionPane;
  */
 public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
     
-    private final RegisterPanel register = new RegisterPanel();
-    private final LoginPanel login = new LoginPanel();
-    
+    private final RegisterPanel register; 
+    private final LoginPanel login;
     private final MainForm form;
     private final DBUserInfo DBUser;
+    
+    private CardLayout cardLayout;
 
     /**
      * Creates new Panel LoginRegisterPanel
      * @param form
      */
-    public SwitchLoginRegisterPanel(MainForm form) {
+    public SwitchLoginRegisterPanel(MainForm form) 
+    {
         initComponents();
-        myInitComponents();
-        eventHandler();
+        
+        this.register = new RegisterPanel(this);
+        this.login = new LoginPanel(this);
         this.form = form;
         this.DBUser = new DBUserInfo();
         
-       // menu = this.form.MPanel;
+        setupCard();
     }
-
-    public void myInitComponents() 
-    {
-        this.jPanel2.add(login);
-        login.setLocation(0,0);
-        login.setSize(340, 502);
-    }  
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -70,17 +67,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         jPanel2.setMaximumSize(new java.awt.Dimension(340, 502));
         jPanel2.setMinimumSize(new java.awt.Dimension(340, 502));
         jPanel2.setOpaque(false);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 340, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
-        );
+        jPanel2.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +76,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(393, 393, 393)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(424, 424, 424))
         );
@@ -99,7 +86,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -107,81 +94,56 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         jPanel1.setBounds(0, 0, 1280, 720);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void eventHandler()
+    private final void setupCard()
     {
+        jPanel2.add(register,"2");
+        jPanel2.add(login,"1");
+        cardLayout = (CardLayout) (jPanel2.getLayout());
+        cardLayout.show(jPanel2, "1");
+    }
     
-        //actions to show register form
-        login.addEventBackToRegister(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //  Show register form
-                jPanel2.removeAll();
-                jPanel2.repaint();
-                jPanel2.validate();
-                jPanel2.add(register);
-                jPanel2.repaint();
-                jPanel2.validate();
-                register.setLocation(0,0);
-                register.setSize(340, 502);
-                register.Register();
+    public void showLoginCard ()
+    {
+        cardLayout.show(jPanel2, "1");
+    }
+    
+    public void showRegisterCard ()
+    {
+        cardLayout.show(jPanel2, "2");
+    }
+    
+    public void doLogin ()
+    {
+        String userName = login.getTxtLoginUser().getText();
+        String password = login.getTxtLoginPw().getText();
+        if(!userName.equals("") && !password.equals(""))
+        {
+            if(DBUser.loginUser(userName, password))
+            {
+                form.card2();
+                form.setMenuName(userName);
+
+                login.clearFields();
+                System.out.println("Login Successful");
             }
-        });
-        
-        //actions to go back to login form
-        register.addEventBackToLogin(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                //  Show register form
-                jPanel2.removeAll();
-                jPanel2.repaint();
-                jPanel2.validate();
-                jPanel2.add(login);
-                jPanel2.repaint();
-                jPanel2.validate();
-                login.setLocation(0,0);
-                login.setSize(340, 502);
-                login.Login();
-            }
-        });
-        
-        login.addEventLogin(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
+            else 
+            {
+                login.clearFields();
+                System.out.println("Login Failed");
+                JOptionPane.showMessageDialog(jPanel2,"Invalid credentials, please try again or get registered","error",JOptionPane.PLAIN_MESSAGE);
+            } 
+        }
+        else
+        {
+            System.out.println("Username or Password field empty");
+            JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
+        }
                 
-                String userName = login.getTxtLoginUser().getText();
-                String password = login.getTxtLoginPw().getText();
-                if(!userName.equals("") && !password.equals(""))
-                {
-                    if(DBUser.loginUser(userName, password))
-                    {
-                        form.switchCards();
-                        form.setMenuName(userName);
-                        
-                        login.clearFields();
-                        System.out.println("Login Successful");
-                    }
-                    else 
-                    {
-                        login.clearFields();
-                        System.out.println("Login Failed");
-                        JOptionPane.showMessageDialog(jPanel2,"Invalid credentials, please try again or get registered","error",JOptionPane.PLAIN_MESSAGE);
-                    } 
-                }
-                else
-                {
-                    System.out.println("Username or Password field empty");
-                    JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
-                }
-                
-                
-            }
-        });
-        
-        register.addEventRegister(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                
-                String userName = register.getTxtRegisterUser().getText();
+    }
+    
+    public void doRegister()
+    {
+        String userName = register.getTxtRegisterUser().getText();
                 String password = register.getTxtRegisterPw().getText();
                 String email = register.getTxtRegisterEmail().getText();
                 
@@ -189,7 +151,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                 {
                     if(DBUser.registerUser(userName,email,password))
                     {
-                        form.switchCards();
+                        form.card2();
                         login.clearFields();
                         form.setMenuName(userName);
                         System.out.println("Register Successful");
@@ -205,9 +167,6 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                     System.out.println("Username, Password, Email field empty");
                     JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
                 }
-            }
-        });
-        
     }
     
   

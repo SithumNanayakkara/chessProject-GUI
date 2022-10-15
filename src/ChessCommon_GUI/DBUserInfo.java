@@ -37,7 +37,7 @@ public class DBUserInfo {
                 this.statement.addBatch("CREATE  TABLE Chess_Players (USERNAME VARCHAR(255), EMAIL VARCHAR(255), PASSWORD VARCHAR(255), SCORE INTEGER)");
                 this.statement.addBatch("INSERT INTO Chess_Players (USERNAME,EMAIL,PASSWORD,SCORE) VALUES"
                  + "('Sithum', 'sithum_nanayakkara@outlook.com', 'sithum', 60)");
-                this.statement.addBatch("ALTER TABLE Chess_Players ADD Chess_Players_Pk PRIMARY KEY (USERNAME)");
+                this.statement.addBatch("ALTER TABLE Chess_Players ADD CONSTRAINT Chess_Players_Pk PRIMARY KEY (USERNAME)");
                 this.statement.executeBatch();
                 System.out.println("Chess_Players Table has been created with Sample data");
             }
@@ -94,15 +94,13 @@ public class DBUserInfo {
     }
     public boolean registerUser(String userName, String email, String password)
     {
-        int count =1;
         boolean registerSuccess = false;
         try {
             if (!loginUser(email, password)) {
-                statement.executeUpdate("INSERT INTO Chess_Players (USERNAME, EMAIL, PASSWORD, SCORE) VALUES ('" + userName + "', '" + email + "', '" + password + "', '" + count + "', 0)");
+                statement.executeUpdate("INSERT INTO Chess_Players (USERNAME, EMAIL, PASSWORD, SCORE) VALUES ('" + userName + "', '" + email + "', '" + password + "', 0)");
                 System.out.println("New user "+userName+" registered");
                 if(email != null || password != null)
                 {
-                    count++;
                     registerSuccess = true;
                 }
             } 

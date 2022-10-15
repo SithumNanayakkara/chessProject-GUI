@@ -12,51 +12,45 @@ import javax.swing.JOptionPane;
  *
  * @author Sithum Nanayakkara <fhb7119@autuni.ac.nz>
  */
-public class SignInUpPage extends javax.swing.JFrame {
+public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
     
-    
-    // private final 
-    private final Register register = new Register();
-    private final Login login = new Login();
+    private final RegisterPanel register = new RegisterPanel();
+    private final LoginPanel login = new LoginPanel();
     private DBUserInfo DBUser;
     private boolean success;
-    
 
     /**
-     * Creates new form SignInUpPage
+     * Creates new Panel LoginRegisterPanel
+     * @param DB
      */
-    public SignInUpPage(DBUserInfo DB) {
+    public SwitchLoginRegisterPanel(DBUserInfo DB) {
         initComponents();
         myInitComponents();
         eventHandler();
-        this.setVisible(true);
         this.DBUser = DB;
         this.success = false;
     }
-        @SuppressWarnings("unchecked")
+
+    public void myInitComponents() 
+    {
+        this.jPanel2.add(login);
+        login.setLocation(0,0);
+        login.setSize(340, 502);
+    }  
+    
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuBar1 = new java.awt.MenuBar();
-        menu1 = new java.awt.Menu();
-        menu2 = new java.awt.Menu();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
 
-        menu1.setLabel("File");
-        menuBar1.add(menu1);
-
-        menu2.setLabel("Edit");
-        menuBar1.add(menu2);
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Chess Game");
+        setMaximumSize(new java.awt.Dimension(1280, 720));
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setResizable(false);
-        setSize(new java.awt.Dimension(1280, 720));
-        getContentPane().setLayout(null);
+        setOpaque(false);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setLayout(null);
 
         jPanel1.setToolTipText("");
         jPanel1.setMaximumSize(new java.awt.Dimension(1280, 720));
@@ -70,7 +64,6 @@ public class SignInUpPage extends javax.swing.JFrame {
         jPanel2.setMaximumSize(new java.awt.Dimension(340, 502));
         jPanel2.setMinimumSize(new java.awt.Dimension(340, 502));
         jPanel2.setOpaque(false);
-        jPanel2.setPreferredSize(new java.awt.Dimension(340, 502));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -88,7 +81,7 @@ public class SignInUpPage extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(423, 423, 423)
+                .addGap(393, 393, 393)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -104,30 +97,13 @@ public class SignInUpPage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1);
+        add(jPanel1);
         jPanel1.setBounds(0, 0, 1280, 720);
-        jPanel1.getAccessibleContext().setAccessibleName("");
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeBackgroundImage.jpg"))); // NOI18N
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1280, 720);
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    //initialising on the login page
-    public void myInitComponents() 
+
+    public void eventHandler()
     {
-        this.jPanel2.add(login);
-        login.setLocation(0,0);
-        login.setSize(340, 502);
-    }   
     
-    /**
-     * @param args the command line arguments
-     */
-    public void eventHandler() {
-                
         //actions to show register form
         login.addEventBackToRegister(new ActionListener() {
             @Override
@@ -143,6 +119,7 @@ public class SignInUpPage extends javax.swing.JFrame {
                 register.setSize(340, 502);
             }
         });
+        
         //actions to go back to login form
         register.addEventBackToLogin(new ActionListener() {
             @Override
@@ -216,21 +193,16 @@ public class SignInUpPage extends javax.swing.JFrame {
             }
         });
         
+        
     }
-
+    
     public boolean isSuccess() {
         return success;
     }
-    
-     
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private java.awt.Menu menu1;
-    private java.awt.Menu menu2;
-    private java.awt.MenuBar menuBar1;
     // End of variables declaration//GEN-END:variables
 }

@@ -12,12 +12,12 @@ import javax.swing.JTextField;
  *
  * @author Sithum Nanayakkara <fhb7119@autuni.ac.nz>
  */
-public class Register extends javax.swing.JPanel {
+public class RegisterPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form SignIn
      */
-    public Register() {
+    public RegisterPanel() {
         initComponents();
     }
     

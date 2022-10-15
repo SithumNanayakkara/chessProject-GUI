@@ -13,13 +13,13 @@ import javax.swing.JTextField;
  *
  * @author Sithum Nanayakkara <fhb7119@autuni.ac.nz>
  */
-public class Login extends javax.swing.JPanel {
+public class LoginPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form SignIn
      */
     boolean registerPage;
-    public Login() {
+    public LoginPanel() {
         initComponents();
     }
     

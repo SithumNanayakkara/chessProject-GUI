@@ -4,9 +4,7 @@
  */
 package ChessPanels;
 
-import ChessDataBase.DBUserInfo;
-import ChessPanels.RegisterPanel;
-import ChessPanels.LoginPanel;
+import java.awt.CardLayout;
 
 /**
  *
@@ -14,45 +12,48 @@ import ChessPanels.LoginPanel;
  */
 public class MainForm extends javax.swing.JFrame {
     
-    
     // private final 
-    private final RegisterPanel register = new RegisterPanel();
-    private final LoginPanel login = new LoginPanel();
-    private DBUserInfo DBUser;
-    private boolean success;
-    
     private final SwitchLoginRegisterPanel LRPanel;
+    private final CardLayout cardLayout;
+    private final MenuPanel MPanel;
+    private String userName;
     
     /**
      * Creates new Main form SignInUpPage
      */
-    public MainForm(DBUserInfo DB) {
+    public MainForm() {
+        
         initComponents();
-        LRPanel = new SwitchLoginRegisterPanel(DB);
-        jPanel1.add(LRPanel);
+        LRPanel = new SwitchLoginRegisterPanel(this);
+        MPanel = new MenuPanel(this);
+        jPanel1.add(LRPanel,"1");
+        jPanel1.add(MPanel,"2");
+        cardLayout = (CardLayout) (jPanel1.getLayout());
+        cardLayout.show(jPanel1,"1");
         this.setVisible(true);
-        
-        
+        this.userName = "";
     }
+    
+    public void switchCards ()
+    {
+        cardLayout.show(jPanel1,"2");
+    }
+    public void setMenuName(String name)
+    {
+        MPanel.welcomeName(name);
+    }
+    
         @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuBar1 = new java.awt.MenuBar();
-        menu1 = new java.awt.Menu();
-        menu2 = new java.awt.Menu();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-
-        menu1.setLabel("File");
-        menuBar1.add(menu1);
-
-        menu2.setLabel("Edit");
-        menuBar1.add(menu2);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chess Game");
         setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 720));
         getContentPane().setLayout(null);
@@ -72,8 +73,5 @@ public class MainForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private java.awt.Menu menu1;
-    private java.awt.Menu menu2;
-    private java.awt.MenuBar menuBar1;
     // End of variables declaration//GEN-END:variables
 }

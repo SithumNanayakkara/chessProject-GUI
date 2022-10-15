@@ -19,19 +19,22 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
     
     private final RegisterPanel register = new RegisterPanel();
     private final LoginPanel login = new LoginPanel();
-    private DBUserInfo DBUser;
-    private boolean success;
+    
+    private final MainForm form;
+    private final DBUserInfo DBUser;
 
     /**
      * Creates new Panel LoginRegisterPanel
-     * @param DB
+     * @param form
      */
-    public SwitchLoginRegisterPanel(DBUserInfo DB) {
+    public SwitchLoginRegisterPanel(MainForm form) {
         initComponents();
         myInitComponents();
         eventHandler();
-        this.DBUser = DB;
-        this.success = false;
+        this.form = form;
+        this.DBUser = new DBUserInfo();
+        
+       // menu = this.form.MPanel;
     }
 
     public void myInitComponents() 
@@ -151,7 +154,9 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                 {
                     if(DBUser.loginUser(userName, password))
                     {
-                        success = true;
+                        form.switchCards();
+                        form.setMenuName(userName);
+                        
                         login.clearFields();
                         System.out.println("Login Successful");
                     }
@@ -167,6 +172,8 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                     System.out.println("Username or Password field empty");
                     JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
                 }
+                
+                
             }
         });
         
@@ -182,6 +189,9 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                 {
                     if(DBUser.registerUser(userName,email,password))
                     {
+                        form.switchCards();
+                        login.clearFields();
+                        form.setMenuName(userName);
                         System.out.println("Register Successful");
                     }
                     else 
@@ -198,14 +208,9 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
             }
         });
         
-        
     }
     
-    //gets the value of success to proceed to the game menu
-    public boolean isSuccess() {
-        return success;
-    }
-
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

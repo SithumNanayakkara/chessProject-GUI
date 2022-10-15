@@ -165,11 +165,12 @@ public class SignInUpPage extends javax.swing.JFrame {
                 
                 String userName = login.getTxtLoginUser().getText();
                 String password = login.getTxtLoginPw().getText();
-                if(!userName.equals("") || !password.equals(""))
+                if(!userName.equals("") && !password.equals(""))
                 {
                     if(DBUser.loginUser(userName, password))
                     {
                         success = true;
+                        login.clearFields();
                         System.out.println("Login Successful");
                     }
                     else 
@@ -195,7 +196,7 @@ public class SignInUpPage extends javax.swing.JFrame {
                 String password = register.getTxtRegisterPw().getText();
                 String email = register.getTxtRegisterEmail().getText();
                 
-                if(!userName.equals("") || !password.equals("") || !email.equals(""))
+                if(!userName.equals("") && !password.equals("") && !email.equals(""))
                 {
                     if(DBUser.registerUser(userName,email,password))
                     {
@@ -204,7 +205,7 @@ public class SignInUpPage extends javax.swing.JFrame {
                     else 
                     {
                         System.out.println("Register Failed");
-                        JOptionPane.showMessageDialog(jPanel2,userName +"already exists, please try again or login","error",JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(jPanel2,userName +" already exists, please try again or login","error",JOptionPane.PLAIN_MESSAGE);
                     }
                 }
                 else

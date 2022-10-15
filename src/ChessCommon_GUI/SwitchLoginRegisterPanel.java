@@ -117,6 +117,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                 jPanel2.validate();
                 register.setLocation(0,0);
                 register.setSize(340, 502);
+                register.Register();
             }
         });
         
@@ -133,6 +134,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                 jPanel2.validate();
                 login.setLocation(0,0);
                 login.setSize(340, 502);
+                login.Login();
             }
         });
         
@@ -196,6 +198,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         
     }
     
+    //gets the value of success to proceed to the game menu
     public boolean isSuccess() {
         return success;
     }

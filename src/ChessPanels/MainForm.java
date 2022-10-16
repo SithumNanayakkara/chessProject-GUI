@@ -35,11 +35,11 @@ public class MainForm extends javax.swing.JFrame {
     }
     
     
-    public void card1 ()
+    public void showCard1 ()
     {
         cardLayout.show(jPanel1,"1");
     }
-    public void card2 ()
+    public void showCard2 ()
     {
         cardLayout.show(jPanel1,"2");
     }

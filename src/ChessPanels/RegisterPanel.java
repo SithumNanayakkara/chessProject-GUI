@@ -22,12 +22,6 @@ public class RegisterPanel extends javax.swing.JPanel {
     {
         initComponents();
         this.panel = switchPanel;
-        register();
-    }
-    
-    public void register()
-    {
-        txtRegisterUser.grabFocus();
     }
     
     @SuppressWarnings("unchecked")
@@ -54,6 +48,11 @@ public class RegisterPanel extends javax.swing.JPanel {
 
         txtRegisterUser.setBackground(new java.awt.Color(204, 255, 255));
         txtRegisterUser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
+        txtRegisterUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRegisterUserActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("User Name");
@@ -63,6 +62,11 @@ public class RegisterPanel extends javax.swing.JPanel {
 
         txtRegisterPw.setBackground(new java.awt.Color(204, 255, 255));
         txtRegisterPw.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
+        txtRegisterPw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRegisterPwActionPerformed(evt);
+            }
+        });
 
         btnRegister.setBackground(new java.awt.Color(0, 102, 102));
         btnRegister.setText("Register");
@@ -87,6 +91,11 @@ public class RegisterPanel extends javax.swing.JPanel {
 
         txtRegisterEmail.setBackground(new java.awt.Color(204, 255, 255));
         txtRegisterEmail.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
+        txtRegisterEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtRegisterEmailActionPerformed(evt);
+            }
+        });
 
         jLabel4.setForeground(new java.awt.Color(204, 255, 255));
         jLabel4.setText("Email");
@@ -157,6 +166,18 @@ public class RegisterPanel extends javax.swing.JPanel {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         panel.doRegister();
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void txtRegisterUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegisterUserActionPerformed
+        txtRegisterPw.grabFocus();
+    }//GEN-LAST:event_txtRegisterUserActionPerformed
+
+    private void txtRegisterEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegisterEmailActionPerformed
+        panel.doRegister();
+    }//GEN-LAST:event_txtRegisterEmailActionPerformed
+
+    private void txtRegisterPwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRegisterPwActionPerformed
+        txtRegisterEmail.grabFocus();
+    }//GEN-LAST:event_txtRegisterPwActionPerformed
 
     public JTextField getTxtRegisterEmail() {
         return txtRegisterEmail;

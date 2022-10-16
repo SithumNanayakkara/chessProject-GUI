@@ -94,7 +94,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         jPanel1.setBounds(0, 0, 1280, 720);
     }// </editor-fold>//GEN-END:initComponents
 
-    private final void setupCard()
+    private void setupCard()
     {
         jPanel2.add(register,"2");
         jPanel2.add(login,"1");
@@ -120,7 +120,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         {
             if(DBUser.loginUser(userName, password))
             {
-                form.card2();
+                form.showCard2();
                 form.setMenuName(userName);
 
                 login.clearFields();
@@ -151,7 +151,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
                 {
                     if(DBUser.registerUser(userName,email,password))
                     {
-                        form.card2();
+                        form.showCard2();
                         login.clearFields();
                         form.setMenuName(userName);
                         System.out.println("Register Successful");

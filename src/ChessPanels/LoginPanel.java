@@ -28,10 +28,10 @@ public class LoginPanel extends javax.swing.JPanel {
         registerPage = false;
     }
     
-    public void Login()
-    {
-        txtLoginUser.grabFocus();
-    }
+//    public void Login()
+//    {
+//        txtLoginUser.grabFocus();
+//    }
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -55,6 +55,11 @@ public class LoginPanel extends javax.swing.JPanel {
 
         txtLoginUser.setBackground(new java.awt.Color(204, 255, 255));
         txtLoginUser.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
+        txtLoginUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLoginUserActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("User Name");
@@ -64,6 +69,11 @@ public class LoginPanel extends javax.swing.JPanel {
 
         txtLoginPw.setBackground(new java.awt.Color(204, 255, 255));
         txtLoginPw.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 102, 102), 2, true));
+        txtLoginPw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLoginPwActionPerformed(evt);
+            }
+        });
 
         btnLogin.setBackground(new java.awt.Color(0, 102, 102));
         btnLogin.setText("Login");
@@ -147,6 +157,14 @@ public class LoginPanel extends javax.swing.JPanel {
     private void btnBackToRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToRegisterActionPerformed
         switchPanel.showRegisterCard();
     }//GEN-LAST:event_btnBackToRegisterActionPerformed
+
+    private void txtLoginUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginUserActionPerformed
+        txtLoginPw.grabFocus();
+    }//GEN-LAST:event_txtLoginUserActionPerformed
+
+    private void txtLoginPwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginPwActionPerformed
+        switchPanel.doLogin();
+    }//GEN-LAST:event_txtLoginPwActionPerformed
 
     public JPasswordField getTxtLoginPw() {
         return txtLoginPw;

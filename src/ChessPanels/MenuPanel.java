@@ -16,6 +16,7 @@ public class MenuPanel extends javax.swing.JPanel {
     
     private final MainForm form;
     private final RulesPanel rulesPanel;
+    private final GamePanel gamePanel;
     private CardLayout cardLayout;
 
     /**
@@ -27,6 +28,7 @@ public class MenuPanel extends javax.swing.JPanel {
         initComponents();
         this.form = form;
         rulesPanel = new RulesPanel(this);
+        gamePanel = new GamePanel(this);
         setupCard();
     }
     
@@ -40,9 +42,11 @@ public class MenuPanel extends javax.swing.JPanel {
     {
         this.add(jPanel1,"Main");
         this.add(rulesPanel,"Rules");
+        this.add(gamePanel, "Game");
         cardLayout = (CardLayout) (this.getLayout());
         cardLayout.show(this, "Main");
     }
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -98,6 +102,11 @@ public class MenuPanel extends javax.swing.JPanel {
         btnNewGame.setBorderPainted(false);
         btnNewGame.setContentAreaFilled(false);
         btnNewGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNewGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewGameActionPerformed(evt);
+            }
+        });
 
         btnLogout.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(204, 255, 255));
@@ -170,6 +179,10 @@ public class MenuPanel extends javax.swing.JPanel {
     private void btnRulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRulesActionPerformed
         cardLayout.show(this, "Rules");
     }//GEN-LAST:event_btnRulesActionPerformed
+
+    private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
+        cardLayout.show(this, "Game");
+    }//GEN-LAST:event_btnNewGameActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

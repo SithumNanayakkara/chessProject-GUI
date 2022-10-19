@@ -62,8 +62,6 @@ public class ProcessMove
         System.out.printf("\nIt is %s's turn ", colour == Colour.Black ? "Black" : "White");
         System.out.print("\nYour Input: ");
         
-        userMove = checkForX(scan);
-        
         return false;
     }
     
@@ -72,18 +70,7 @@ public class ProcessMove
      * @param scan
      * @return 
      */
-    
-    public String checkForX(Scanner scan)
-    {
-        String inputValue = scan.nextLine();
-        if (inputValue.equalsIgnoreCase("x"))
-        {
-            System.out.println("\nExiting....");
-            System.out.println("Thanks for playing!");
-            System.exit(0);
-        }
-        return inputValue;
-    }
+
     
     /**
      * checks if any colour is in checkmate 
@@ -104,51 +91,6 @@ public class ProcessMove
             return checkKing.isCheckMate(board);
         }
     }
-    /**
-    *   Takes the users String input and convert them into rank and file coordinates.Then,
-        it check if the input coordinates are inside the board and is in the correct format
-        Lastly, it calls the getMoveCells() as its return.
-     * @return 
-    */
-    public int convertToCoordinates()
-    {
-        
-        String[] moveSplit = this.userMove.split(" ");
-        
-        if(userMove.split(" ").length != 2)
-        {
-            System.out.println("\nAlert: Wrong input! Please enter both initial and final positions");
-            return -1;
-        }
-        
-        initalCoordinate = moveSplit[0];
-        finalCoordinate = moveSplit[1];
-        
-        if(initalCoordinate.length()!= 2)
-        {
-            System.out.println("\nAlert: Invalid Starting Coordinated, please try again!");
-            return -1;
-        }
-        else if(finalCoordinate.length()!= 2)
-        {
-            System.out.println("\nAlert: Invalid Final Coordinated, please try again!");
-            return -1;
-        }
-        
-        initialRank = 7 - (initalCoordinate.charAt(1)- '1'); //To get the x axis values (not x values)
-        initialFile = initalCoordinate.charAt(0) - 'a'; //To get the y axis values
-        
-        finalRank = 7 - (finalCoordinate.charAt(1)- '1'); //To get the x axis values
-        finalFile = finalCoordinate.charAt(0) - 'a'; //To get the y axis values
-        
-        if ((initialRank < 0 || initialRank > 7 || initialFile < 0 || initialFile > 7)||(finalRank < 0 || finalRank > 7 || finalFile < 0 || finalFile > 7)) 
-        {
-            System.out.println("\nAlert: Invalid Coordinates, please try again!");
-            return -1;
-        }
-        
-        return getMoveCells();
-    }
     
     /**
      *  @return 
@@ -157,7 +99,7 @@ public class ProcessMove
      *  Then, it creates a move object which puts together the coordinates of the initial and final position of one move
      *  Lastly, it calls the doMove method in its return with the move parameter.
      */
-    public int getMoveCells()
+    public int getMoveCells(int initialRank, int initialFile, int finalRank, int finalFile)
     {
         BoardCell initialCell = this.board.getCell(initialRank,initialFile);
         BoardCell finalCell = this.board.getCell(finalRank, finalFile);

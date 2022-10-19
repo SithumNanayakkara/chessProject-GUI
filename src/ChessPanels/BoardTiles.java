@@ -4,8 +4,11 @@
  */
 package ChessPanels;
 
+import ChessLogic.Board.Board;
 import java.awt.Color;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -14,43 +17,62 @@ import java.awt.Dimension;
 public class BoardTiles extends javax.swing.JPanel {
     
     private final static Dimension GAMEBOARD_TILE_DIMENSION = new Dimension(90,90);
+    
     private final Color colour1 = new java.awt.Color(204,255,255);
     private final Color colour2 = new java.awt.Color(0,102,102);
-    private final int tileNo;
+    private final Board board;
+    
+    private final int tileCol;
+    private final int tileRow;
     /**
      * Creates new form NewJPanel
      */
-    public BoardTiles(BoardPanel panels,int tileNo) {
+    public BoardTiles(BoardPanel panels,int tileCol, int tileRow ) {
         initComponents();
-        this.tileNo = tileNo;
+        this.tileCol = tileCol;
+        this.tileRow = tileRow;
         this.setPreferredSize(GAMEBOARD_TILE_DIMENSION);
+        this.board = new Board();
         tileColour();
+        setPiece();
         validate();
     }
     
-    private void tileColour() 
+    private void setPiece()
     {
-        if(tileNo < 8 || (tileNo > 15 && tileNo <24)||(tileNo > 31 && tileNo <40)|| (tileNo > 47 && tileNo <56))
+        this.removeAll();
+        if((board.getCell(tileCol, tileRow).getPiece()) != null)
         {
-            if(tileNo %2 == 0)
-            {
-                this.setBackground(colour1);
-            }
-            else 
-            this.setBackground(colour2);
-        }
-        else
-        {
-            if(tileNo %2 == 0)
-            {
-                this.setBackground(colour2);
-            }
-            else 
-            this.setBackground(colour1);
+            String fileName = board.getCell(tileCol, tileRow).getPiece().toString();
+            add(new JLabel (new ImageIcon(getClass().getResource("/resources/"+ fileName +".png"))));
         }
     }
     
-
+    
+    private void tileColour() 
+    {
+        
+        if(tileRow %2 ==0)
+        {
+            if(tileCol %2 ==0)
+            {
+                this.setBackground(colour1);
+            }
+            else
+                this.setBackground(colour2);
+        }
+        else
+        {
+            if(tileCol %2 ==0)
+            {
+                this.setBackground(colour2);
+            }
+            else
+                this.setBackground(colour1);
+        }
+           
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

@@ -33,11 +33,15 @@ public class BoardPanel extends javax.swing.JPanel {
     
     public void createPanels()
     {
-        for (int i=0; i<64; i++)
+        for (int c=0; c<8; c++)
         {
-            final BoardTiles tilePanel = new BoardTiles(this,i);
-            this.add(tilePanel);
-            this.tiles.add(tilePanel);
+            for(int r=0; r<8; r++)
+            {
+                final BoardTiles tilePanel = new BoardTiles(this,c,r);
+                this.add(tilePanel);
+                this.tiles.add(tilePanel);
+            }
+            
         }
         
     } 

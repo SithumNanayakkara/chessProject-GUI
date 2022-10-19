@@ -58,7 +58,7 @@ public class ProcessMove
         {
             return true;
         }
-        
+        //System.out.println(board.getCell(1, 1).getPiece().toString());
         System.out.printf("\nIt is %s's turn ", colour == Colour.Black ? "Black" : "White");
         System.out.print("\nYour Input: ");
         

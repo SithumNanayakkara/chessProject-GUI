@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import static javax.swing.SwingUtilities.isLeftMouseButton;
+import static javax.swing.SwingUtilities.isRightMouseButton;
 
 /**
  *
@@ -18,9 +20,11 @@ public class BoardTiles extends javax.swing.JPanel {
     
     private final static Dimension GAMEBOARD_TILE_DIMENSION = new Dimension(90,90);
     
+    private ProcessCoordinates coordinates;
     private final Color colour1 = new java.awt.Color(204,255,255);
     private final Color colour2 = new java.awt.Color(0,102,102);
     private final Board board;
+    private final BoardPanel boardPanel;
     
     private final int tileCol;
     private final int tileRow;
@@ -33,6 +37,7 @@ public class BoardTiles extends javax.swing.JPanel {
         this.tileRow = tileRow;
         this.setPreferredSize(GAMEBOARD_TILE_DIMENSION);
         this.board = new Board();
+        this.boardPanel = panels;
         tileColour();
         setPiece();
         validate();
@@ -47,7 +52,6 @@ public class BoardTiles extends javax.swing.JPanel {
             add(new JLabel (new ImageIcon(getClass().getResource("/resources/"+ fileName +".png"))));
         }
     }
-    
     
     private void tileColour() 
     {
@@ -73,6 +77,8 @@ public class BoardTiles extends javax.swing.JPanel {
            
     }
    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,8 +89,41 @@ public class BoardTiles extends javax.swing.JPanel {
     private void initComponents() {
 
         setPreferredSize(new java.awt.Dimension(1280, 720));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         setLayout(new java.awt.GridBagLayout());
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if(isLeftMouseButton(evt))
+        {
+            if(boardPanel.getInitialXCoordinate() == null || boardPanel.getInitialYCoordinate() == null)
+            {
+                boardPanel.setInitialXCoordinate(this.tileCol);
+                boardPanel.setInitialYCoordinate(this.tileRow);
+            }
+            else
+            {
+                boardPanel.setFinalXCoordinate(this.tileCol);
+                boardPanel.setFinalYCoordinate(this.tileRow);
+                boardPanel.ProcessMove();
+            }
+            
+        }
+        else if(isRightMouseButton(evt))
+        {
+            boardPanel.setInitialXCoordinate(null);
+            boardPanel.setInitialYCoordinate(null);
+            boardPanel.setFinalXCoordinate(null);
+            boardPanel.setFinalYCoordinate(null);
+        }
+        
+//        if(boardPanel.getInitialXCoordinate()!=null && boardPanel.getInitialYCoordinate() != null && boardPanel.getFinalXCoordinate()!=null && boardPanel.getFinalYCoordinate() != null)
+//        boardPanel.ProcessMove();
+    }//GEN-LAST:event_formMouseClicked
 
     
 

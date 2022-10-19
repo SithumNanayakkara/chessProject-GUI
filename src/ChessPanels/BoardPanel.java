@@ -4,6 +4,7 @@
  */
 package ChessPanels;
 
+import ChessLogic.Common.ProcessMove;
 import java.awt.Dimension;
 import java.util.List;
 import java.util.ArrayList;
@@ -14,21 +15,30 @@ import java.util.ArrayList;
  */
 public class BoardPanel extends javax.swing.JPanel {
     
-    
+    private ProcessMove processMove;
     private final static Dimension GAMEBOARD_PANEL_DIMENSION = new Dimension(720,720);
     final List<BoardTiles> tiles;
+    private Integer initialXCoordinate;
+    private Integer finalXCoordinate;
+    private Integer initialYCoordinate;
+    private Integer finalYCoordinate;
     //private final BoardTiles boardTiles;
     
     /**
      * Creates new form GamePanel
      */
-    public BoardPanel() {
+    public BoardPanel(GamePanel gamePanel) {
         initComponents();
         this.tiles = new ArrayList<>();
         createPanels();
         this.setSize(GAMEBOARD_PANEL_DIMENSION);
         this.setLocation(0, 0);
         this.validate( );
+        this.initialXCoordinate = null;
+        this.finalXCoordinate = null;
+        this.initialYCoordinate = null;
+        this.finalYCoordinate = null;
+        this.processMove = new ProcessMove();
     }
     
     public void createPanels()
@@ -41,11 +51,54 @@ public class BoardPanel extends javax.swing.JPanel {
                 this.add(tilePanel);
                 this.tiles.add(tilePanel);
             }
-            
+        }
+    } 
+    
+    public Integer getInitialXCoordinate() {
+        return initialXCoordinate;
+    }
+
+    public void setInitialXCoordinate(Integer initialCoordinate) {
+        this.initialXCoordinate = initialCoordinate;
+    }
+
+    public Integer getFinalXCoordinate() {
+        return finalXCoordinate;
+    }
+
+    public void setFinalXCoordinate(Integer finalCoordinate) {
+        this.finalXCoordinate = finalCoordinate;
+    }
+    
+    public Integer getInitialYCoordinate() {
+        return initialYCoordinate;
+    }
+
+    public void setInitialYCoordinate(Integer initialCoordinate) {
+        this.initialYCoordinate = initialCoordinate;
+    }
+
+    public Integer getFinalYCoordinate() {
+        return finalYCoordinate;
+    }
+
+    public void setFinalYCoordinate(Integer finalCoordinate) {
+        this.finalYCoordinate = finalCoordinate;
+    }
+    
+    public void ProcessMove()
+    {
+        int returnValue = processMove.getMoveCells(initialXCoordinate, initialYCoordinate,finalXCoordinate, finalYCoordinate);
+        if(returnValue != 0)
+        {
+            this.initialXCoordinate = null;
+            this.finalXCoordinate = null;
+            this.initialYCoordinate = null;
+            this.finalYCoordinate = null;
         }
         
-    } 
-
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

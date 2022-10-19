@@ -52,6 +52,7 @@ public class BoardPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 102, 102), new java.awt.Color(153, 255, 255), new java.awt.Color(0, 51, 51), new java.awt.Color(51, 255, 255)));
         setOpaque(false);
         setLayout(new java.awt.GridLayout(8, 8));
     }// </editor-fold>//GEN-END:initComponents

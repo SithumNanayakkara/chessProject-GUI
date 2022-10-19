@@ -14,6 +14,8 @@ import java.awt.Dimension;
 public class BoardTiles extends javax.swing.JPanel {
     
     private final static Dimension GAMEBOARD_TILE_DIMENSION = new Dimension(90,90);
+    private final Color colour1 = new java.awt.Color(204,255,255);
+    private final Color colour2 = new java.awt.Color(0,102,102);
     private final int tileNo;
     /**
      * Creates new form NewJPanel
@@ -32,22 +34,20 @@ public class BoardTiles extends javax.swing.JPanel {
         {
             if(tileNo %2 == 0)
             {
-                this.setBackground(Color.red);
+                this.setBackground(colour1);
             }
             else 
-            this.setBackground(Color.blue);
+            this.setBackground(colour2);
         }
         else
         {
             if(tileNo %2 == 0)
             {
-                this.setBackground(Color.blue);
+                this.setBackground(colour2);
             }
             else 
-            this.setBackground(Color.red);
+            this.setBackground(colour1);
         }
-        
-       
     }
     
 

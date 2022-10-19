@@ -5,6 +5,7 @@
 package ChessPanels;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 
@@ -18,6 +19,7 @@ public class MenuPanel extends javax.swing.JPanel {
     private final RulesPanel rulesPanel;
     private final GamePanel gamePanel;
     private CardLayout cardLayout;
+
 
     /**
      * Creates new panel MenuPanel

@@ -27,12 +27,7 @@ public class LoginPanel extends javax.swing.JPanel {
         this.switchPanel = panel;
         registerPage = false;
     }
-    
-//    public void Login()
-//    {
-//        txtLoginUser.grabFocus();
-//    }
- 
+      
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -149,6 +144,7 @@ public class LoginPanel extends javax.swing.JPanel {
 
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         switchPanel.doLogin();
         

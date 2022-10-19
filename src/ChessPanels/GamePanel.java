@@ -19,6 +19,7 @@ import java.awt.RenderingHints;
  */
 public class GamePanel extends javax.swing.JPanel {
     
+
     private final MenuPanel menuPanel;
     private final BoardPanel boardPanel;
     private final Color colour1 = new java.awt.Color(0,204,204);//new java.awt.Color(204,255,255);
@@ -29,7 +30,7 @@ public class GamePanel extends javax.swing.JPanel {
      */
     public GamePanel(MenuPanel menu) {
         initComponents();
-        boardPanel = new BoardPanel();
+        boardPanel = new BoardPanel(this);
         this.add(boardPanel);
         this.validate();
         this.menuPanel = menu;
@@ -44,6 +45,7 @@ public class GamePanel extends javax.swing.JPanel {
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, 1920, 720);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

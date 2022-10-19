@@ -92,20 +92,20 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
 
     private void setupCard()
     {
-        jPanel2.add(register,"2");
-        jPanel2.add(login,"1");
+        jPanel2.add(register,"register");
+        jPanel2.add(login,"login");
         cardLayout = (CardLayout) (jPanel2.getLayout());
-        cardLayout.show(jPanel2, "1");
+        cardLayout.show(jPanel2, "login");
     }
     
     public void showLoginCard ()
     {
-        cardLayout.show(jPanel2, "1");
+        cardLayout.show(jPanel2, "login");
     }
     
     public void showRegisterCard ()
     {
-        cardLayout.show(jPanel2, "2");
+        cardLayout.show(jPanel2, "register");
     }
     
     public void doLogin ()

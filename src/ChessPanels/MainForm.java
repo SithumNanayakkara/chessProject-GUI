@@ -5,6 +5,11 @@
 package ChessPanels;
 
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -29,9 +34,20 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1.add(MPanel,"2");
         cardLayout = (CardLayout) (jPanel1.getLayout());
         cardLayout.show(jPanel1,"1");
+        setBackground();
         this.setVisible(true);
     }
     
+    public void setBackground()
+    {
+        
+        try {
+            jLabel2.setIcon( new ImageIcon(ImageIO.read(getClass().getResource("/resources/BkgImage.jpg"))));
+        } catch (IOException ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
     
     public void showCard1 ()
     {
@@ -66,9 +82,8 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1.setLayout(new java.awt.CardLayout());
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/HomeBackgroundImage.jpg"))); // NOI18N
         jLabel2.setName(""); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

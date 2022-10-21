@@ -21,12 +21,12 @@ public class Board
     public Board()
     {
        cells = new BoardCell [8] [8];
-       setup();
+       //setup();
     }
     /**
      * adds pieces to the array
      */
-    public static void setup()
+    public void setup()
     {
         
         cells [0][0] = new BoardCell(0,0, new Rook(Colour.Black));
@@ -88,5 +88,41 @@ public class Board
     public static void setCells(BoardCell[][] cells)
     {
         Board.cells = cells;
+    }
+    
+    /**
+     * prints the board
+     */
+    public void printBoard()
+    {
+        int count =1;
+        System.out.println("\n           Chess Board");
+        System.out.println("           ===========");
+        System.out.println("    A    B   C    D    E   F    G    H");
+        System.out.println(" + — — — — — — — — — — — +");
+        for(int i = 7; i>=0; i--)
+        {
+            System.out.print(count + "｜");
+            
+            for(int j = 0; j<8; j++)
+            {
+                BoardCell emptyCells = cells[i][j];
+                
+                
+                if(emptyCells.getPiece() == null)
+                {
+                    System.out.printf(" %s ",emptyCells);
+                }
+                else
+                {
+                    System.out.printf(" %s ",emptyCells.getPiece().toString());
+                }    
+            }
+            System.out.print("｜" + count);
+            System.out.println();
+            count++;
+        }
+        System.out.println(" + — — — — — — — — — — — +");
+        System.out.println("    A    B   C    D    E   F    G    H");
     }
 }

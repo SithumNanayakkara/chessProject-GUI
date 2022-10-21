@@ -17,7 +17,7 @@ public class MenuPanel extends javax.swing.JPanel {
     
     private final MainForm form;
     private final RulesPanel rulesPanel;
-    private final GamePanel gamePanel;
+    //private final GamePanel gamePanel;
     private CardLayout cardLayout;
 
 
@@ -30,7 +30,7 @@ public class MenuPanel extends javax.swing.JPanel {
         initComponents();
         this.form = form;
         rulesPanel = new RulesPanel(this);
-        gamePanel = new GamePanel(this);
+        //gamePanel = new GamePanel(this);
         setupCard();
     }
     
@@ -44,7 +44,7 @@ public class MenuPanel extends javax.swing.JPanel {
     {
         this.add(jPanel1,"Main");
         this.add(rulesPanel,"Rules");
-        this.add(gamePanel, "Game");
+        //this.add(gamePanel, "Game");
         cardLayout = (CardLayout) (this.getLayout());
         cardLayout.show(this, "Main");
     }
@@ -183,6 +183,8 @@ public class MenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRulesActionPerformed
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
+        final GamePanel gamePanel = new GamePanel(this);
+        this.add(gamePanel, "Game");
         cardLayout.show(this, "Game");
     }//GEN-LAST:event_btnNewGameActionPerformed
 

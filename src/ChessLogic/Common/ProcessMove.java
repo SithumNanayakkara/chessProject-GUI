@@ -45,53 +45,43 @@ public class ProcessMove
         board = new Board ();
         scan = new Scanner (System.in);
         movesPlayed = new ArrayList <String>();
+        setColour();
+        showWhoMoves();
     }
     /**
      * Checks if the game is in a winning point (any checkmates)
      * gets the user to input the desired move
      * @return 
      */
-    public boolean getUserMove()
+    public void showWhoMoves()
     {
-       
-        if(this.winningCondition())
-        {
-            return true;
-        }
-        //System.out.println(board.getCell(1, 1).getPiece().toString());
         System.out.printf("\nIt is %s's turn ", colour == Colour.Black ? "Black" : "White");
         System.out.print("\nYour Input: ");
-        
-        return false;
     }
-    
-    /**
-     * checks if the input contains an X to exit 
-     * @param scan
-     * @return 
-     */
-
     
     /**
      * checks if any colour is in checkmate 
      * @return 
      */
-    public boolean winningCondition ()
+    
+    public void setColour()
     {
         if(this.isWhite())
         {
             this.colour = Colour.White;
-            checkKing = new King(colour);
-            return checkKing.isCheckMate(board);
+            
         }
         else
         {
             this.colour = Colour.Black;
-            checkKing = new King(colour);
-            return checkKing.isCheckMate(board);
         }
     }
     
+    public boolean winningCondition ()
+    {
+        checkKing = new King(this.colour);
+        return checkKing.isCheckMate(board);
+    }
     /**
      *  @return 
      *  It initializes the BoardCell class with the rank and file coordinate system from the earlier method
@@ -130,9 +120,6 @@ public class ProcessMove
             System.out.println("\nAlert: You are not allowed to move enemies pieces, please try again!");
             return -1;
         }
-        
-       
-        
         if(this.initialPiece.allowedMove(this.board,move.getInitialC(), move.getFinalC()) == -1) //if illegal move
         {
             System.out.println("\nAlert: " +move.getInitialC().toString() + " cannot move like that, please try again!");
@@ -148,18 +135,16 @@ public class ProcessMove
             this.processCastling(move);
             this.turn++;
             return 0;
-        
         }
         if(isKingChecked(move))
         {
             return -1;
         }
-        
         if(this.finalPiece != null) //killing
         {
             this.finalPiece.setPeiceStatus(true);
             move.setKilledPiece(this.finalPiece);
-            System.out.println(this.finalPiece.toString()+" at \""+ this.finalCoordinate.toUpperCase() +"\" is Killed!");
+            //System.out.println(this.finalPiece.toString()+" at \""+ this.finalCoordinate.toUpperCase() +"\" is Killed!");
         }
         
         move.getInitialC().getPiece().setIsInitialMove(false);
@@ -171,6 +156,8 @@ public class ProcessMove
         
         
         this.turn++;
+        setColour();
+        showWhoMoves();
         return 0;
     }
     
@@ -197,6 +184,8 @@ public class ProcessMove
             
             System.out.println("Pieces "+ move.getFinalC().toString()+" and " + moveCastling.getFinalC().toString() + " castled!");
             this.turn++;
+            setColour();
+            showWhoMoves();
         }
         if(initialFile+finalFile == 10) //castling on the right
         {
@@ -259,12 +248,8 @@ public class ProcessMove
             }
             move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
             move.getFinalC().setPiece(null); //removing temp piece
-            
-            
         }
-        
         return false;
-        
     }
     //displays the log files one line at a time
     public void displayMoves()
@@ -274,11 +259,11 @@ public class ProcessMove
             System.out.println(moves);
         }
     }
-    
     //checks which colour is moving 
     public boolean isWhite ()
     {
         return this.turn % 2 == 0;
     } 
     
-    }
+}
+   

@@ -32,7 +32,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         this.register = new RegisterPanel(this);
         this.login = new LoginPanel(this);
         this.form = form;
-        this.DBUser = new DBUserInfo();
+        this.DBUser = DBUserInfo.getInstance();
         
         setupCard();
     }

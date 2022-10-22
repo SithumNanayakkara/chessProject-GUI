@@ -60,7 +60,7 @@ public class ProcessMove
     }
     
     /**
-     * checks if any colour is in checkmate 
+     * sets the colour for the correct turn
      * @return 
      */
     
@@ -77,7 +77,7 @@ public class ProcessMove
         }
     }
     
-    public boolean winningCondition ()
+     public boolean winningCondition ()
     {
         checkKing = new King(this.colour);
         return checkKing.isCheckMate(board);
@@ -91,6 +91,11 @@ public class ProcessMove
      */
     public int getMoveCells(int initialRank, int initialFile, int finalRank, int finalFile)
     {
+        this.finalFile = finalFile;
+        this.finalRank = finalRank;
+        this.initialRank = initialRank;
+        this.initialFile = initialFile;
+        
         BoardCell initialCell = this.board.getCell(initialRank,initialFile);
         BoardCell finalCell = this.board.getCell(finalRank, finalFile);
 
@@ -133,7 +138,6 @@ public class ProcessMove
         if (this.initialPiece.allowedMove(this.board,move.getInitialC(), move.getFinalC()) == 2)  //if king is castling
         {
             this.processCastling(move);
-            this.turn++;
             return 0;
         }
         if(isKingChecked(move))
@@ -175,6 +179,8 @@ public class ProcessMove
             BoardCell newInitialCell = this.board.getCell(initialRank,initialFile-4);
             BoardCell newFinalCell = this.board.getCell(finalRank, finalFile+1);
             Move moveCastling = new Move(newInitialCell,newFinalCell);
+            
+            System.out.println("Pieces "+ move.getFinalC().toString()+" and " + moveCastling.getFinalC().toString() + " castled!");
 
             move.getFinalC().setPiece(move.getInitialC().getPiece());
             move.getInitialC().setPiece(null);
@@ -182,7 +188,6 @@ public class ProcessMove
             moveCastling.getFinalC().setPiece(moveCastling.getInitialC().getPiece());
             moveCastling.getInitialC().setPiece(null);
             
-            System.out.println("Pieces "+ move.getFinalC().toString()+" and " + moveCastling.getFinalC().toString() + " castled!");
             this.turn++;
             setColour();
             showWhoMoves();
@@ -192,16 +197,19 @@ public class ProcessMove
             BoardCell newInitialCell = this.board.getCell(initialRank,initialFile+3);
             BoardCell newFinalCell = this.board.getCell(finalRank, finalFile-1);
             Move moveCastling = new Move(newInitialCell,newFinalCell);
-
+            
             System.out.println("Pieces "+ move.getInitialC().toString()+" and " + moveCastling.getInitialC().toString() + " castled!");
-
+            
             move.getFinalC().setPiece(move.getInitialC().getPiece());
             move.getInitialC().setPiece(null);
 
             moveCastling.getFinalC().setPiece(moveCastling.getInitialC().getPiece());
             moveCastling.getInitialC().setPiece(null);
+            
+            this.turn++;
+            setColour();
+            showWhoMoves();
         }
-    
     }
     
     /**

@@ -64,10 +64,12 @@ public class RulesPanel extends javax.swing.JPanel {
         btnBackToMenu.setBounds(30, 630, 118, 24);
         btnBackToMenu.setOpaque( false );
 
-        jScrollPane1.setForeground(new java.awt.Color(255, 204, 102));
+        jScrollPane1.setForeground(new java.awt.Color(60, 63, 65));
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        jScrollPane1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setMinimumSize(new java.awt.Dimension(16, 1));
+        jScrollPane1.setOpaque(false);
         jScrollPane1.setPreferredSize(new java.awt.Dimension(1280, 720));
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 51));
@@ -192,13 +194,13 @@ public class RulesPanel extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addGap(30, 30, 30)
                 .addComponent(jTextPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(229, 229, 229))
+                .addGap(250, 250, 250))
         );
 
         jScrollPane1.setViewportView(jPanel2);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(0, 0, 1292, 720);
+        jScrollPane1.setBounds(0, 0, 1280, 720);
         jScrollPane1.setOpaque( false );
         jScrollPane1.getViewport().setOpaque( false );
         jScrollPane1.getVerticalScrollBar().setUnitIncrement(16);

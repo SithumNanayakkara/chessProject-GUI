@@ -2,10 +2,13 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessPanels;
+package ChessLogic.Common;
 
 import ChessLogic.Board.Board;
 import ChessLogic.Common.ProcessMove;
+import ChessPanels.BoardPanel;
+import ChessPanels.BoardTiles;
+import ChessPanels.GamePanel;
 import java.awt.event.MouseEvent;
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;

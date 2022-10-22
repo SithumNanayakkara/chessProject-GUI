@@ -4,6 +4,7 @@
  */
 package ChessPanels;
 
+import ChessLogic.Common.MovePiece;
 import ChessLogic.Board.Board;
 import ChessLogic.Common.ProcessMove;
 import java.awt.Dimension;

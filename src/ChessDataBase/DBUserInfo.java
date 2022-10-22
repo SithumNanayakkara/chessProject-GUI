@@ -4,9 +4,9 @@
  */
 package ChessDataBase;
 
-import ChessDataBase.DBConnection;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,27 +18,61 @@ import javax.swing.JOptionPane;
  */
 public class DBUserInfo {
     
-    private final DBConnection dbConnect;
-    private final Connection conn;
+    private static DBUserInfo db;
+    private static final String USER_NAME = "Chess"; //DB username
+    private static final String PASSWORD = "Chess"; // DB password
+    private static final String URL = "jdbc:derby:ChessUserInfo; create=true";  //url of the DB host
+    
+   // private final DBConnection dbConnect;
+    private Connection conn;
     private Statement statement;
     
-    public DBUserInfo ()
+    protected DBUserInfo()
     {
-        dbConnect = new DBConnection();
-        System.out.println(dbConnect.getConnection());
-        conn = dbConnect.getConnection();
-        connectChessDB();
+        if(!establishConnection())
+        {
+            JOptionPane.showMessageDialog(null,"Database connection failed, please make sure all other instances of the game are closed","Error - Starting Database",JOptionPane.ERROR_MESSAGE);
+            System.out.println("Database connection failed, please make sure all other instances of the game is closed");
+            System.exit(0);
+        }
+        
+        setupChessDB();
+        System.out.println(this.conn);
     }
     
-    public void connectChessDB() {
+    public static DBUserInfo getInstance()
+    {
+         if (db == null)  
+        {  
+            db = new DBUserInfo();  
+        }  
+        return db;  
+        
+    }
+    
+    //Establish connection
+    protected boolean establishConnection() {
+        if (this.conn == null) {
+            try {
+                conn = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
+                System.out.println(URL + " Get Connected Successfully ....");
+                return true;
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+                return false;
+            }
+        }
+        return false;
+    }
+    
+    protected void setupChessDB() {
         try {
             this.statement = conn.createStatement();
             if(!this.checkExistedTable("Chess_Players"))
             {
-                this.statement.addBatch("CREATE  TABLE Chess_Players (USERNAME VARCHAR(255), EMAIL VARCHAR(255), PASSWORD VARCHAR(255), SCORE INTEGER)");
+                this.statement.addBatch("CREATE  TABLE Chess_Players (USERNAME VARCHAR(255) NOT NULL, EMAIL VARCHAR(255) NOT NULL, PASSWORD VARCHAR(255) NOT NULL, SCORE INTEGER NOT NULL, PRIMARY KEY (USERNAME))");
                 this.statement.addBatch("INSERT INTO Chess_Players (USERNAME,EMAIL,PASSWORD,SCORE) VALUES"
-                 + "('Sithum', 'sithum_nanayakkara@outlook.com', 'sithum', 60)");
-                this.statement.addBatch("ALTER TABLE Chess_Players ADD CONSTRAINT Chess_Players_Pk PRIMARY KEY (USERNAME)");
+                                            + "('Sithum', 'sithum_nanayakkara@outlook.com', 'sithum', 60)");
                 this.statement.executeBatch();
                 System.out.println("Chess_Players Table has been created with Sample data");
             }
@@ -47,7 +81,7 @@ public class DBUserInfo {
         }
     }
     
-    public boolean checkExistedTable(String name) {
+    protected boolean checkExistedTable(String name) {
         boolean tableAlreadyExists = false;
         try {
             DatabaseMetaData dbmd = this.conn.getMetaData();
@@ -57,7 +91,6 @@ public class DBUserInfo {
 
             while (rs.next()) {
                 String table_name = rs.getString("TABLE_NAME");
-                //System.out.println(table_name);
                 if (table_name.equalsIgnoreCase(name)) {
                     System.out.println("Table already Exists!");
                     tableAlreadyExists = true;
@@ -71,11 +104,6 @@ public class DBUserInfo {
         
         return tableAlreadyExists;
     }
-
-    public void closeConnection() {
-        this.dbConnect.closeConnections();
-    }
-    
     
     public boolean loginUser(String userName, String password)
     {
@@ -117,4 +145,13 @@ public class DBUserInfo {
         return registerSuccess;
     }
     
+    public void closeConnections() {
+        if (conn != null) {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 }

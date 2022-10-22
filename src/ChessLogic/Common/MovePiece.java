@@ -5,23 +5,20 @@
 package ChessLogic.Common;
 
 import ChessLogic.Board.Board;
-import ChessLogic.Common.ProcessMove;
 import ChessPanels.BoardPanel;
 import ChessPanels.BoardTiles;
 import ChessPanels.GamePanel;
-import java.awt.event.MouseEvent;
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;
-import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Sithum Nanayakkara <fhb7119@autuni.ac.nz>
  */
-public class MovePiece {
+public class MovePiece{
 
     private final ProcessMove pMove; 
-    private final BoardPanel bPanel;
+    private final BoardPanel boardPanel;
     private final GamePanel gamePanel;
     private final Board chessBoard;
     private Integer initialXCoordinate;
@@ -29,11 +26,11 @@ public class MovePiece {
     private Integer initialYCoordinate;
     private Integer finalYCoordinate;
     
-    public MovePiece(ProcessMove pMove, BoardPanel panel, GamePanel gPanel, Board cb) 
+    public MovePiece(ProcessMove pMove, BoardPanel bPanel, GamePanel gPanel, Board cb) 
     {
         
        this.pMove  = pMove;
-       this.bPanel = panel;
+       this.boardPanel = bPanel;
        this.chessBoard = cb;
        this.gamePanel = gPanel;
        this.initialXCoordinate = null;
@@ -78,7 +75,8 @@ public class MovePiece {
         {
             int returnValue= pMove.getMoveCells(this.initialXCoordinate, this.initialYCoordinate, this.finalXCoordinate, this.finalYCoordinate);
             clearValues();
-            bPanel.createPanels();
+            gamePanel.showColour();
+            boardPanel.createPanels();
         }
         pMove.winningCondition();
     }

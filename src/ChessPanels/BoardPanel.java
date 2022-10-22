@@ -31,7 +31,7 @@ public class BoardPanel extends javax.swing.JPanel {
     public BoardPanel(GamePanel gp, ProcessMove pm, Board cb) {
         initComponents();
         this.tiles = new ArrayList<>();
-        this.movePiece = new MovePiece(pm,this,gp);
+        this.movePiece = new MovePiece(pm,this,gp,cb);
         this.chessBoard = cb;
         this.chessBoard.setup();
         this.setSize(GAMEBOARD_PANEL_DIMENSION);

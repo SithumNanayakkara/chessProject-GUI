@@ -20,15 +20,18 @@ public class MovePiece {
     private final ProcessMove pMove; 
     private final BoardPanel bPanel;
     private final GamePanel gamePanel;
+    private final Board chessBoard;
     private Integer initialXCoordinate;
     private Integer finalXCoordinate;
     private Integer initialYCoordinate;
     private Integer finalYCoordinate;
     
-    public MovePiece(ProcessMove pMove, BoardPanel panel, GamePanel gPanel) 
+    public MovePiece(ProcessMove pMove, BoardPanel panel, GamePanel gPanel, Board cb) 
     {
+        
        this.pMove  = pMove;
        this.bPanel = panel;
+       this.chessBoard = cb;
        this.gamePanel = gPanel;
        this.initialXCoordinate = null;
        this.finalXCoordinate = null;
@@ -74,8 +77,7 @@ public class MovePiece {
             clearValues();
             bPanel.createPanels();
         }
-        else
-            System.out.println("WON");
+        pMove.winningCondition();
     }
     
     public void clearValues()

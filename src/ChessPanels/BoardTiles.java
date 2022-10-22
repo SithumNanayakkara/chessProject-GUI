@@ -27,7 +27,7 @@ public class BoardTiles extends javax.swing.JPanel {
     
     private final Board board;
     private final MovePiece move;
-    private final BoardPanel boardPanel;
+    //private final BoardPanel boardPanel;
     
     private final int tileCol;
     private final int tileRow;
@@ -38,7 +38,7 @@ public class BoardTiles extends javax.swing.JPanel {
         initComponents();
         this.tileCol = tileCol;
         this.tileRow = tileRow;
-        this.boardPanel = panels;
+        //this.boardPanel = panels;
         this.move = mp;
         this.board = cb;
         tileColour();

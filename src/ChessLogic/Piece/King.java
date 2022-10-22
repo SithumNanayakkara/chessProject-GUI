@@ -149,10 +149,9 @@ public class King extends Piece
         {
             for(BoardCell cell : cells)
             {  
-                if(cell.getPiece() != null && !(cell.getPiece() instanceof King) && cell.getPiece() 
+                 if(cell.getPiece() != null && !(cell.getPiece() instanceof King) && cell.getPiece() 
                         != this && cell.getPiece().getColour() != this.getColour() && cell.getPiece().allowedMove(board, cell, kingLocation) != -1)
                 {
-                    
                     this.checkBy = cell;
                     this.checkPiece = cell.getPiece();
                     return true;
@@ -165,7 +164,7 @@ public class King extends Piece
     /**
      * Checks if the king got checkmated
      * @param board
-     * @return 
+     * @return  
      */
     public boolean isCheckMate (Board board)
     {
@@ -188,7 +187,7 @@ public class King extends Piece
                         return false;
                     }
                     //cehck if other pieces can 
-                    else if(cell.getPiece() != null && cell.getPiece().allowedMove(board, cell, this.checkBy) != -1)
+                    else if(cell.getPiece() != null && !(cell.getPiece() instanceof King) && cell.getPiece().allowedMove(board, cell, this.checkBy) != -1)
                     {
                         return false;
                     }   

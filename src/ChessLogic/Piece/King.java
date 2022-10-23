@@ -203,9 +203,9 @@ public class King extends Piece
         return false;
     }
 
-    public BoardCell getCheckBy() 
+    public String getCheckBy() 
     {
-        return this.checkBy;
+        return this.checkPiece.toString();
     }
     
    

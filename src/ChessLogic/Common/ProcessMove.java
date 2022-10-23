@@ -3,7 +3,6 @@ package ChessLogic.Common;
 import ChessLogic.Piece.King;
 import ChessLogic.Board.Board;
 import ChessLogic.Piece.Piece;
-import java.util.Scanner;
 import ChessLogic.Board.BoardCell;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,37 +12,32 @@ import java.util.List;
  * @author Sithum Nanayakkara <fhb7119@autuni.ac.nz>
  */
 
-public class ProcessMove 
+public class ProcessMove
 {
-    
     private King checkKing;
     private Colour colour;
-    private String userMove;
     private final Board board;
-    private final Scanner scan;
-    private List<String> movesPlayed;
+    private final List<String> movesPlayed;
     
     private Piece initialPiece, finalPiece;
     private String initalCoordinate, finalCoordinate;
     private int turn, initialRank, initialFile,finalRank, finalFile;
     
+    private String invalidMove;
     
     
-    public ProcessMove() 
+    
+    public ProcessMove () 
     {
         this.turn = 0;
         this.finalFile = 0;
         this.finalRank = 0;
         this.initialRank = 0;
         this.initialFile = 0;
-        
-        this.userMove = "";
-        
         this.initialPiece = null;
         this.finalPiece = null;
-        
+        this.invalidMove = "";
         board = new Board ();
-        scan = new Scanner (System.in);
         movesPlayed = new ArrayList <String>();
         setColour();
         showWhoMoves();
@@ -53,10 +47,11 @@ public class ProcessMove
      * gets the user to input the desired move
      * @return 
      */
-    public void showWhoMoves()
+    public String showWhoMoves()
     {
         System.out.printf("\nIt is %s's turn ", colour == Colour.Black ? "Black" : "White");
         System.out.print("\nYour Input: ");
+        return this.colour.toString();
     }
     
     /**
@@ -69,12 +64,21 @@ public class ProcessMove
         if(this.isWhite())
         {
             this.colour = Colour.White;
-            
         }
         else
         {
             this.colour = Colour.Black;
         }
+    }
+    
+    public String getColour()
+    {
+        return this.colour.toString();
+    }
+    
+    public String getInvalidMove()
+    {
+        return invalidMove;
     }
     
      public boolean winningCondition ()
@@ -111,28 +115,33 @@ public class ProcessMove
      */
     public int doMove (Move move)
     {
+        this.invalidMove = "";
         initialPiece = move.getInitialC().getPiece();
         finalPiece = move.getFinalC().getPiece();
         
         if(this.initialPiece == null) //if coordinates are null
         {
-            System.out.println("\nAlert: Initial Coordinate contains no piece, please try again!");
+            this.invalidMove = "Alert: Initial click contains no piece, please try again!";
+            System.out.println("\n" + invalidMove);
             return -1;
         }
         
         if(this.initialPiece.getColour()!= this.colour) //if opponents pices are moved
         {
-            System.out.println("\nAlert: You are not allowed to move enemies pieces, please try again!");
+            this.invalidMove = "Alert: Can't move enemies pieces, please try again!";
+            System.out.println("\n" + invalidMove);
             return -1;
         }
         if(this.initialPiece.allowedMove(this.board,move.getInitialC(), move.getFinalC()) == -1) //if illegal move
         {
-            System.out.println("\nAlert: " +move.getInitialC().toString() + " cannot move like that, please try again!");
+            this.invalidMove = "Alert: " +move.getInitialC().toString() + " can't move like that, please try again!";
+            System.out.println("\n" + invalidMove);
             return -1;
         }
         if (this.initialPiece.allowedMove(this.board,move.getInitialC(), move.getFinalC()) == -2) //if king is getting checked
         {
-            System.out.println("\nAlert: " +move.getInitialC().toString() + " is getting checked by " + this.checkKing.getCheckBy().toString() + ", please try again!");
+            this.invalidMove = ("Alert: " + move.getInitialC().toString() + " is getting checked by " + this.checkKing.getCheckBy() + ", please try again!");
+            System.out.println("\n"+ invalidMove);
             return -1;   
         }
         if (this.initialPiece.allowedMove(this.board,move.getInitialC(), move.getFinalC()) == 2)  //if king is castling
@@ -148,7 +157,8 @@ public class ProcessMove
         {
             this.finalPiece.setPeiceStatus(true);
             move.setKilledPiece(this.finalPiece);
-            //System.out.println(this.finalPiece.toString()+" at \""+ this.finalCoordinate.toUpperCase() +"\" is Killed!");
+            this.invalidMove = (this.finalPiece.toString()+" got "+ " Killed!");
+            System.out.println(invalidMove);
         }
         
         move.getInitialC().getPiece().setIsInitialMove(false);
@@ -157,7 +167,6 @@ public class ProcessMove
         
         //sotres the moves to show logs later on
         movesPlayed.add((turn+1)+" "+this.initalCoordinate + " " +this.initialPiece.toString() + " to " + this.finalCoordinate );
-        
         
         this.turn++;
         setColour();
@@ -179,14 +188,17 @@ public class ProcessMove
             BoardCell newInitialCell = this.board.getCell(initialRank,initialFile-4);
             BoardCell newFinalCell = this.board.getCell(finalRank, finalFile+1);
             Move moveCastling = new Move(newInitialCell,newFinalCell);
-            
-            System.out.println("Pieces "+ move.getFinalC().toString()+" and " + moveCastling.getFinalC().toString() + " castled!");
 
             move.getFinalC().setPiece(move.getInitialC().getPiece());
             move.getInitialC().setPiece(null);
 
             moveCastling.getFinalC().setPiece(moveCastling.getInitialC().getPiece());
             moveCastling.getInitialC().setPiece(null);
+            
+            
+            
+            this.invalidMove = ("Pieces "+ move.getFinalC().toString()+" and " + moveCastling.getFinalC().toString() + " castled!");
+            System.out.println(invalidMove);
             
             this.turn++;
             setColour();
@@ -198,13 +210,16 @@ public class ProcessMove
             BoardCell newFinalCell = this.board.getCell(finalRank, finalFile-1);
             Move moveCastling = new Move(newInitialCell,newFinalCell);
             
-            System.out.println("Pieces "+ move.getInitialC().toString()+" and " + moveCastling.getInitialC().toString() + " castled!");
             
             move.getFinalC().setPiece(move.getInitialC().getPiece());
             move.getInitialC().setPiece(null);
 
             moveCastling.getFinalC().setPiece(moveCastling.getInitialC().getPiece());
             moveCastling.getInitialC().setPiece(null);
+            
+            
+            this.invalidMove = ("Pieces "+ move.getFinalC().toString()+" and " + moveCastling.getFinalC().toString() + " castled!");
+            System.out.println(invalidMove);
             
             this.turn++;
             setColour();
@@ -232,7 +247,8 @@ public class ProcessMove
                 move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
                 move.getFinalC().setPiece(null); //removing temp piece
                 
-                System.out.println("\nAlert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy().getPiece().toString() + " requires attention!\nPlease try again!");
+                this.invalidMove = ("Alert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy() + " requires attention! Please try again!");
+                System.out.println(invalidMove);
                 return true;
             }
             
@@ -251,7 +267,8 @@ public class ProcessMove
                 move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
                 move.getFinalC().setPiece(null); //removing temp piece
                 
-                System.out.println("\nAlert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy().getPiece().toString() + " requires attention!\nPlease try again!");
+                this.invalidMove = ("Alert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy() + " requires attention! Please try again!");
+                System.out.println(invalidMove);
                 return true;
             }
             move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
@@ -264,7 +281,7 @@ public class ProcessMove
     {
         for(String moves: this.movesPlayed)
         {
-            System.out.println(moves);
+             System.out.println(moves);
         }
     }
     //checks which colour is moving 

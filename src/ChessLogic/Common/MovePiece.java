@@ -73,12 +73,16 @@ public class MovePiece{
     { 
         if(!pMove.winningCondition())
         {
-            int returnValue= pMove.getMoveCells(this.initialXCoordinate, this.initialYCoordinate, this.finalXCoordinate, this.finalYCoordinate);
+            pMove.getMoveCells(this.initialXCoordinate, this.initialYCoordinate, this.finalXCoordinate, this.finalYCoordinate);
             clearValues();
-            gamePanel.showColour();
+            gamePanel.updateInfo();
             boardPanel.createPanels();
         }
-        pMove.winningCondition();
+        if(pMove.winningCondition())
+        {
+            gamePanel.displayWin();
+        }
+        
     }
     
     public void clearValues()

@@ -28,6 +28,7 @@ public class BoardTiles extends javax.swing.JPanel {
     
     private final Board board;
     private final MovePiece move;
+    private final GamePanel gamePanel;
     //private final BoardPanel boardPanel;
     
     private final int tileCol;
@@ -35,13 +36,13 @@ public class BoardTiles extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel
      */
-    public BoardTiles(BoardPanel panels,int tileCol, int tileRow, MovePiece mp , Board cb) {
+    public BoardTiles(BoardPanel panels,int tileCol, int tileRow, MovePiece mp , Board cb, GamePanel gp) {
         initComponents();
         this.tileCol = tileCol;
         this.tileRow = tileRow;
-        //this.boardPanel = panels;
         this.move = mp;
         this.board = cb;
+        this.gamePanel = gp;
         tileColour();
         setPiece();
         validate();
@@ -58,6 +59,7 @@ public class BoardTiles extends javax.swing.JPanel {
         this.validate();
         this.repaint();
     }
+    
     
     private void tileColour() 
     {
@@ -82,6 +84,8 @@ public class BoardTiles extends javax.swing.JPanel {
         }
            
     }
+    
+
    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -97,6 +101,19 @@ public class BoardTiles extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+
+        String piece;
+        if(board.getCell(tileCol, tileRow).getPiece() != null)
+        {
+            piece = board.getCell(tileCol, tileRow).getPiece().toString() + "(" + tileCol + "," + tileRow + ")";
+        }
+        else 
+        {
+            piece = "empty" + "(" + tileCol + "," + tileRow + ")";
+        }
+        
+        gamePanel.updatePieceInfo(piece);
+        
         move.getMove(this.tileCol,this.tileRow,evt,this);
     }//GEN-LAST:event_formMouseClicked
     // Variables declaration - do not modify//GEN-BEGIN:variables

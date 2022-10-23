@@ -20,7 +20,7 @@ public class BoardPanel extends javax.swing.JPanel {
     final List<BoardTiles> tiles;
     private final Board chessBoard;
     private final MovePiece movePiece;
-    
+    private final GamePanel gamePanel;
     private final static Dimension GAMEBOARD_PANEL_DIMENSION = new Dimension(720,720);
     
     /**
@@ -35,6 +35,7 @@ public class BoardPanel extends javax.swing.JPanel {
         this.movePiece = new MovePiece(pm,this,gp,cb);
         this.chessBoard = cb;
         this.chessBoard.setup();
+        this.gamePanel = gp;
         this.setSize(GAMEBOARD_PANEL_DIMENSION);
         this.setLocation(0, 0);
         createPanels();
@@ -48,7 +49,7 @@ public class BoardPanel extends javax.swing.JPanel {
         {
             for(int r=0; r<8; r++)
             {
-                final BoardTiles tilePanel = new BoardTiles(this,c,r,movePiece, chessBoard);
+                final BoardTiles tilePanel = new BoardTiles(this,c,r,movePiece, chessBoard, gamePanel);
                 this.add(tilePanel);
                 this.tiles.add(tilePanel);
             }

@@ -5,7 +5,11 @@
 package ChessPanels;
 
 import ChessDataBase.DBUserInfo;
+import ChessDataBase.User;
+import ChessDataBase.processUserInfo;
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,7 +21,8 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
     private final RegisterPanel register; 
     private final LoginPanel login;
     private final MainForm form;
-    private final DBUserInfo DBUser;
+    //private final processUserInfo processInfo;
+    //private final DBUserInfo DBUser;
     
     private CardLayout cardLayout;
 
@@ -28,11 +33,11 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
     public SwitchLoginRegisterPanel(MainForm form) 
     {
         initComponents();
-        
-        this.register = new RegisterPanel(this);
-        this.login = new LoginPanel(this);
+        this.register = new RegisterPanel();
+        this.login = new LoginPanel();
         this.form = form;
-        this.DBUser = DBUserInfo.getInstance();
+        //this.processInfo = new processUserInfo(this,form);
+        //this.DBUser = DBUserInfo.getInstance();
         
         setupCard();
     }
@@ -70,7 +75,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(393, 393, 393)
+                .addGap(411, 411, 411)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -96,6 +101,7 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         jPanel2.add(login,"login");
         cardLayout = (CardLayout) (jPanel2.getLayout());
         cardLayout.show(jPanel2, "login");
+        actions();
     }
     
     public void showLoginCard ()
@@ -108,64 +114,76 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         cardLayout.show(jPanel2, "register");
     }
     
-    public void doLogin ()
+    public String getLUsername()
     {
-        String userName = login.getTxtLoginUser().getText();
-        String password = login.getTxtLoginPw().getText();
-        if(!userName.equals("") && !password.equals(""))
-        {
-            if(DBUser.loginUser(userName, password))
-            {
-                form.showCard2();
-                form.setMenuName(userName);
-
-                login.clearFields();
-                System.out.println("Login Successful");
-            }
-            else 
-            {
-                login.clearFields();
-                System.out.println("Login Failed");
-                JOptionPane.showMessageDialog(jPanel2,"Invalid credentials, please try again or get registered","error",JOptionPane.PLAIN_MESSAGE);
-            } 
-        }
-        else
-        {
-            System.out.println("Username or Password field empty");
-            JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
-        }
-                
+        return login.getUserField().getText();
     }
     
-    public void doRegister()
+    public String getLPassword()
     {
-        String userName = register.getTxtRegisterUser().getText();
-                String password = register.getTxtRegisterPw().getText();
-                String email = register.getTxtRegisterEmail().getText();
-                
-                if(!userName.equals("") && !password.equals("") && !email.equals(""))
-                {
-                    if(DBUser.registerUser(userName,email,password))
-                    {
-                        form.showCard2();
-                        login.clearFields();
-                        form.setMenuName(userName);
-                        System.out.println("Register Successful");
-                    }
-                    else 
-                    {
-                        System.out.println("Register Failed");
-                        JOptionPane.showMessageDialog(jPanel2,userName +" already exists, please try again or login","error",JOptionPane.PLAIN_MESSAGE);
-                    }
-                }
-                else
-                {
-                    System.out.println("Username, Password, Email field empty");
-                    JOptionPane.showMessageDialog(jPanel2,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
-                }
+        return login.getPasswordField().getText();
     }
     
-  
+    public String getRUsername()
+    {
+        return register.getRegisterUserField().getText();
+    }
+    
+    public String getRPassword()
+    {
+        return register.getRegisterPwField().getText();
+    }
+    
+    public String getREmail()
+    {
+        return register.getRegisterEmailField().getText();
+    }
+    
+    public void setName(String name)
+    {
+        form.setMenuName(name);
+    }
+    
+    public void actions ()
+    {
+        this.login.getBtnBackToRegister().addActionListener((ActionEvent e) -> {
+            showRegisterCard ();
+        });
+        
+        this.login.getBtnLogin().addActionListener((ActionEvent e) -> {
+            form.doLogin();
+        });    
+        
+        this.login.getUserField().addActionListener((ActionEvent e) -> {
+            login.getPasswordField().grabFocus();
+        });  
+        
+        this.login.getPasswordField().addActionListener((ActionEvent e) -> {
+            form.doLogin();
+            login.clearFields();
+        });   
+        
+        this.register.getBtnBackToLogin().addActionListener((ActionEvent e) -> {
+            showLoginCard();
+        });
+        
+        this.register.getBtnRegister().addActionListener((ActionEvent e) -> {
+            form.doRegister();
+        });
+        
+        this.register.getRegisterUserField().addActionListener((ActionEvent e) -> {
+            register.getRegisterPwField().grabFocus();
+        });    
+        
+        this.register.getRegisterPwField().addActionListener((ActionEvent e) -> {
+            register.getRegisterEmailField().grabFocus();
+        });  
+        
+        this.register.getRegisterEmailField().addActionListener((ActionEvent e) -> {
+            form.doRegister();
+        });
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

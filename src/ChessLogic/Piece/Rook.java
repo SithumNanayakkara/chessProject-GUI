@@ -52,11 +52,11 @@ public class Rook extends Piece
     {
         if(this.getColour() == Colour.Black)
         {
-            return "♜";
+            return "Black Rook";
         }
         else
         {
-            return "♖";
+            return "White Rook";
         }
     }
     

@@ -53,11 +53,11 @@ public class Knight extends Piece
     {
         if(this.getColour() == Colour.Black)
         {
-            return "♞";
+            return "Black Knight";
         }
         else
         {
-            return "♘";
+            return "White Knight";
         }
     }
     

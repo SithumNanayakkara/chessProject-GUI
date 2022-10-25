@@ -87,11 +87,11 @@ public class Pawn extends Piece
     {
         if(this.getColour() == Colour.Black)
         {
-            return "♟";
+            return "Black Pawn";
         }
         else
         {
-            return "♙";
+            return "White Pawn";
         }
     }
 }

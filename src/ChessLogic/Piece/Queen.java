@@ -58,11 +58,11 @@ public class Queen extends Piece
     {
         if(this.getColour() == Colour.Black)
         {
-            return "♛";
+            return "Black Queen";
         }
         else
         {
-            return "♕";
+            return "White Queen";
         }
     }
 }

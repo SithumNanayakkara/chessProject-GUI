@@ -215,11 +215,11 @@ public class King extends Piece
     {
         if(this.getColour() == Colour.Black)
         {
-            return "♚";
+            return "Black King";
         }
         else
         {
-            return "♔";
+            return "White King";
         }
     }
     

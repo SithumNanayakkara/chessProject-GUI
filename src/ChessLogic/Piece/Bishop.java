@@ -51,11 +51,11 @@ public class Bishop extends Piece
     {
         if(this.getColour() == Colour.Black)
         {
-            return "♝";
+            return "Black Bishop";
         }
         else
         {
-            return "♗";
+            return "White Bishop";
         }
     }
 }

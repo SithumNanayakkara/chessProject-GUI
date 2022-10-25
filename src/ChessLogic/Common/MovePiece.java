@@ -80,17 +80,19 @@ public class MovePiece{
         }
         if(pMove.winningCondition())
         {
+            gamePanel.increaseScore();
             gamePanel.displayWin();
+            gamePanel.displayScore();
         }
         
     }
     
     public void clearValues()
     {
-            this.setInitialXCoordinate(null);
-            this.setInitialYCoordinate(null);
-            this.setFinalXCoordinate(null);
-            this.setFinalYCoordinate(null);
+        this.setInitialXCoordinate(null);
+        this.setInitialYCoordinate(null);
+        this.setFinalXCoordinate(null);
+        this.setFinalYCoordinate(null);
     }
     
     public Integer getInitialXCoordinate() {

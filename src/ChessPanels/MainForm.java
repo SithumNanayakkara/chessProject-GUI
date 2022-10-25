@@ -4,6 +4,7 @@
  */
 package ChessPanels;
 
+import ChessDataBase.processUserInfo;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -19,8 +20,9 @@ public class MainForm extends javax.swing.JFrame {
     
     // private final 
     private final SwitchLoginRegisterPanel LRPanel;
+    private final processUserInfo processInfo;
     private final CardLayout cardLayout;
-    private final MenuPanel MPanel;
+    private MenuPanel MPanel;
     
     /**
      * Creates new Main form SignInUpPage
@@ -29,9 +31,8 @@ public class MainForm extends javax.swing.JFrame {
         
         initComponents();
         LRPanel = new SwitchLoginRegisterPanel(this);
-        MPanel = new MenuPanel(this);
+        processInfo = new processUserInfo(LRPanel,this);
         jPanel1.add(LRPanel,"1");
-        jPanel1.add(MPanel,"2");
         cardLayout = (CardLayout) (jPanel1.getLayout());
         cardLayout.show(jPanel1,"1");
         setBackground();
@@ -40,13 +41,11 @@ public class MainForm extends javax.swing.JFrame {
     
     public void setBackground()
     {
-        
         try {
             jLabel2.setIcon( new ImageIcon(ImageIO.read(getClass().getResource("/resources/BkgImage.jpg"))));
         } catch (IOException ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
     }
     
     public void showCard1 ()
@@ -55,11 +54,23 @@ public class MainForm extends javax.swing.JFrame {
     }
     public void showCard2 ()
     {
+        MPanel = new MenuPanel(this,processInfo);
+        jPanel1.add(MPanel,"2");
         cardLayout.show(jPanel1,"2");
     }
     public void setMenuName(String name)
     {
         MPanel.welcomeName(name);
+    }
+    
+    public void doLogin ()
+    {
+        this.processInfo.doLogin();
+    }
+    
+    public void doRegister ()
+    {
+        this.processInfo.doRegister();
     }
     
         @SuppressWarnings("unchecked")

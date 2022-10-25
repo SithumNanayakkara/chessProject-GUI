@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author Sithum Nanayakkara <fhb7119@autuni.ac.nz>
  */
-public class DBUserInfo {
+public final class DBUserInfo {
     
     private static DBUserInfo db;
     private static final String USER_NAME = "Chess"; //DB username
@@ -121,6 +121,24 @@ public class DBUserInfo {
         }
         return loginSuccess;
     }
+    
+    public User loadUser(String userName, String password)
+    {
+        User user =null;
+        try 
+        {
+            ResultSet rs = statement.executeQuery("SELECT * FROM Chess_Players WHERE USERNAME='" + userName+ "'AND PASSWORD = '" + password + "'");
+            if (rs.next()) {
+                user = new User(rs.getString("USERNAME"),rs.getString("PASSWORD"),rs.getString("EMAIL"),rs.getInt("SCORE"));
+            }
+            rs.close();
+            
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return user;
+    }
+    
     public boolean registerUser(String userName, String email, String password)
     {
         boolean registerSuccess = false;
@@ -128,10 +146,7 @@ public class DBUserInfo {
             if (!loginUser(email, password)) {
                 statement.executeUpdate("INSERT INTO Chess_Players (USERNAME, EMAIL, PASSWORD, SCORE) VALUES ('" + userName + "', '" + email + "', '" + password + "', 0)");
                 System.out.println("New user "+userName+" registered");
-                if(email != null || password != null)
-                {
-                    registerSuccess = true;
-                }
+                registerSuccess = true;
             } 
             else 
             { 
@@ -154,4 +169,14 @@ public class DBUserInfo {
             }
         }
     }
+    
+    public void updateScore(User user)
+    {
+        try {
+            statement.executeUpdate("UPDATE Chess_Players SET SCORE = " + user.getScore() + "WHERE USERNAME = '" + user.getUserName() + "'");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
 }

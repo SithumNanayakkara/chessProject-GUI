@@ -20,4 +20,4 @@
 
 <h3>Rules Page</h3>
 
-![image](https://user-images.githubusercontent.com/115341061/198403316-18eca8f7-722d-4256-abf8-6d7dbdc32fee.png
+![image](https://user-images.githubusercontent.com/115341061/198403316-18eca8f7-722d-4256-abf8-6d7dbdc32fee.png)

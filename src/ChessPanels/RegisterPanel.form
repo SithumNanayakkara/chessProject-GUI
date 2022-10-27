@@ -33,7 +33,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtRegisterUser" linkSize="1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtRegisterUser" linkSize="1" alignment="0" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="46" max="32767" attributes="0"/>
                   </Group>
@@ -49,7 +49,7 @@
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jLabel3" max="32767" attributes="0"/>
                               <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtRegisterPw" linkSize="1" alignment="1" pref="240" max="32767" attributes="0"/>
+                              <Component id="txtRegisterPw" linkSize="1" alignment="0" pref="240" max="32767" attributes="0"/>
                               <Component id="txtRegisterEmail" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>

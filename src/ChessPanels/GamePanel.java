@@ -109,16 +109,26 @@ public class GamePanel extends javax.swing.JPanel {
         this.info.getUser().setScore(this.info.getUser().getScore()+10);
     }
     
+    public void decreaseScore()
+    {
+        this.info.getUser().setScore(this.info.getUser().getScore()-10);
+    }
+    
     public void displayWin()
     {
         this.jPanel2.remove(turnsLabel);
         if(pm.getColour() == "Black")
         {
+            increaseScore();
             this.info.updateDB();
             this.turnsLabel.setText("WHITE WINS!" +" ("+ this.info.getUser().getUserName()+")");
         }
         else
+        {
+            decreaseScore();
+            this.info.updateDB();
             this.turnsLabel.setText("BLACK WINS!");
+        }
         
         this.jPanel2.add(turnsLabel);
         this.turnsLabel.validate();
@@ -128,7 +138,14 @@ public class GamePanel extends javax.swing.JPanel {
     public void displayScore()
     {
         this.jPanel2.remove(invalidMoveLabel);
-        this.invalidMoveLabel.setText("Current Score: " + this.info.getUser().getScore());
+        
+        if(pm.getColour() == "Black")
+        {
+           this.invalidMoveLabel.setText("Current Score: " + this.info.getUser().getScore()+ " (+10)");
+        }
+        else
+            this.invalidMoveLabel.setText("Current Score: " + this.info.getUser().getScore()+ " (-10)");
+        
         this.jPanel2.add(invalidMoveLabel);
         this.invalidMoveLabel.validate();
         this.invalidMoveLabel.repaint();
@@ -146,7 +163,6 @@ public class GamePanel extends javax.swing.JPanel {
         pieceLabel = new javax.swing.JLabel();
         turnsLabel = new javax.swing.JLabel();
         invalidMoveLabel = new javax.swing.JLabel();
-        scoreLabel = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
@@ -176,9 +192,6 @@ public class GamePanel extends javax.swing.JPanel {
         invalidMoveLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         invalidMoveLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        scoreLabel.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -186,11 +199,9 @@ public class GamePanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(turnsLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pieceLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(invalidMoveLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 425, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(turnsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pieceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(invalidMoveLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -200,11 +211,9 @@ public class GamePanel extends javax.swing.JPanel {
                 .addComponent(turnsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pieceLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(invalidMoveLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scoreLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -212,20 +221,20 @@ public class GamePanel extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(420, Short.MAX_VALUE)
                 .addComponent(btnBackToMenu)
                 .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(378, 378, 378)
+                .addGap(267, 267, 267)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
+                .addGap(243, 243, 243)
                 .addComponent(btnBackToMenu)
                 .addGap(21, 21, 21))
         );
@@ -258,7 +267,6 @@ public class GamePanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel pieceLabel;
-    private javax.swing.JLabel scoreLabel;
     private javax.swing.JLabel turnsLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -105,11 +105,11 @@ public class BoardTiles extends javax.swing.JPanel {
         String piece;
         if(board.getCell(tileCol, tileRow).getPiece() != null)
         {
-            piece = board.getCell(tileCol, tileRow).getPiece().toString() + "(" + tileCol + "," + tileRow + ")";
+            piece = board.getCell(tileCol, tileRow).getPiece().toString() + " (" + tileCol + "," + tileRow + ")";
         }
         else 
         {
-            piece = "empty" + "(" + tileCol + "," + tileRow + ")";
+            piece = "empty" + " (" + tileCol + "," + tileRow + ")";
         }
         
         gamePanel.updatePieceInfo(piece);

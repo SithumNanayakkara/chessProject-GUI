@@ -80,7 +80,6 @@ public class MovePiece{
         }
         if(pMove.winningCondition())
         {
-            gamePanel.increaseScore();
             gamePanel.displayWin();
             gamePanel.displayScore();
         }

@@ -40,7 +40,6 @@ public class ProcessMove
         board = new Board ();
         movesPlayed = new ArrayList <String>();
         setColour();
-        showWhoMoves();
     }
     /**
      * Checks if the game is in a winning point (any checkmates)
@@ -170,7 +169,6 @@ public class ProcessMove
         
         this.turn++;
         setColour();
-        showWhoMoves();
         return 0;
     }
     
@@ -202,7 +200,6 @@ public class ProcessMove
             
             this.turn++;
             setColour();
-            showWhoMoves();
         }
         if(initialFile+finalFile == 10) //castling on the right
         {
@@ -223,7 +220,6 @@ public class ProcessMove
             
             this.turn++;
             setColour();
-            showWhoMoves();
         }
     }
     

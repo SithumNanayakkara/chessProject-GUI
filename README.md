@@ -1,6 +1,6 @@
 Welcome to the chessProject-GUI
 
-Here is a preview of the game so far:
+Here is a preview of the game so far
 
 Login Page
 
@@ -21,3 +21,7 @@ Game Page
 Rules Page
 
 ![image](https://user-images.githubusercontent.com/115341061/198403316-18eca8f7-722d-4256-abf8-6d7dbdc32fee.png)
+
+@settings {
+  font-size: 100;
+}

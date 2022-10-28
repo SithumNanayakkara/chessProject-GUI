@@ -45,16 +45,16 @@ public class King extends Piece
         int x1 = Math.abs(initialPos.getXLocation()-finalPos.getXLocation());
         int y1 = Math.abs(initialPos.getYLocation()-finalPos.getYLocation());
         
-       
         if (finalPos.getPiece() != null && finalPos.getPiece().getColour() == this.getColour()) //if attacking same colour
         {
             return -1;
         }
+
         if(this.isCheck(initialPos, finalPos, board)) //if in check
         {
             return -2;
         }
-        
+       
         Rook rook = new Rook (this.getColour());
         GameRules rules = new GameRules(board,initialPos.getXLocation(), initialPos.getYLocation(), finalPos.getXLocation(), finalPos.getYLocation());
         
@@ -108,7 +108,7 @@ public class King extends Piece
             }
         }
         move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
-        move.getFinalC().setPiece(null); //removing temp piece
+        move.getFinalC().setPiece(tempPiece); //removing temp piece
          
         return false;
     }
@@ -137,7 +137,7 @@ public class King extends Piece
     }
     
     /**
-     * Checks if the previous (enemy) move caused the kind to be checked
+     * Checks if the previous (enemy) move caused the king to be checked
      * @param board
      * @return 
      */
@@ -180,14 +180,8 @@ public class King extends Piece
             {
                 for(BoardCell cell : cells)
                 {
-                    
-                    //check if king can kill the check piece
-                    if(cell.getPiece() != null && cell.getPiece().allowedMove(board, kingLocation(board), cell) != -1)
-                    {
-                        return false;
-                    }
-                    //cehck if other pieces can 
-                    else if(cell.getPiece() != null && !(cell.getPiece() instanceof King) && cell.getPiece().allowedMove(board, cell, this.checkBy) != -1)
+                    //check if other pieces can kill
+                    if(cell.getPiece() != null && !(cell.getPiece() instanceof King) && cell.getPiece().allowedMove(board, cell, this.checkBy) != -1)
                     {
                         return false;
                     }   
@@ -195,8 +189,14 @@ public class King extends Piece
                 }
             }
             
+            //check if king can kill the check piece
+            if(this.allowedMove(board, this.kingLocation(board), this.checkBy) != -1)
+            {
+                return false;
+            }
+            
             System.out.println("\n        "+this.checkPiece+ " Checkmated " + this.toString());
-            System.out.println("           "+this.checkPiece.getColour() + " Wins!");
+            System.out.println("                "+this.checkPiece.getColour() + " Wins!");
             return true;
         }               
         
@@ -207,8 +207,6 @@ public class King extends Piece
     {
         return this.checkPiece.toString();
     }
-    
-   
 
     @Override
     public String toString() 

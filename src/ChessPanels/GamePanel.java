@@ -87,7 +87,7 @@ public class GamePanel extends javax.swing.JPanel {
         {
             pieces[0] = piece;
         }
-        else if( pieceSplit[0].equals("empty") && !pieces[0].equals(""))
+        else if( pieceSplit[0].equals("empty"))
         {
             pieces[0] = piece;
         }
@@ -99,7 +99,7 @@ public class GamePanel extends javax.swing.JPanel {
         this.pieceLabel.validate();
         this.pieceLabel.repaint();
         
-        if(pieces[0].equals("") && pieces[1].equals(""))
+        if(!pieces[0].equals("") && !pieces[1].equals(""))
         {
             pieces[0] = "";
             pieces[1] = "";

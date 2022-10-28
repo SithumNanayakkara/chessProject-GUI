@@ -8,6 +8,7 @@ import ChessLogic.Board.Board;
 import ChessPanels.BoardPanel;
 import ChessPanels.BoardTiles;
 import ChessPanels.GamePanel;
+import java.awt.event.ActionEvent;
 import static javax.swing.SwingUtilities.isLeftMouseButton;
 import static javax.swing.SwingUtilities.isRightMouseButton;
 
@@ -25,10 +26,11 @@ public class MovePiece{
     private Integer finalXCoordinate;
     private Integer initialYCoordinate;
     private Integer finalYCoordinate;
+    private boolean gameOver;
     
     public MovePiece(ProcessMove pMove, BoardPanel bPanel, GamePanel gPanel, Board cb) 
     {
-        
+       this.gameOver = false;
        this.pMove  = pMove;
        this.boardPanel = bPanel;
        this.chessBoard = cb;
@@ -45,15 +47,15 @@ public class MovePiece{
     {
         if(isLeftMouseButton(event))
         {
-            if(this.getInitialXCoordinate() == null || this.getInitialYCoordinate() == null)
+            if(this.initialXCoordinate == null || this.initialYCoordinate == null)
             {
-                this.setInitialXCoordinate(tileCol);
-                this.setInitialYCoordinate(tileRow);
+                this.initialXCoordinate = tileCol;
+                this.initialYCoordinate = tileRow;
             }
             else
             {
-                this.setFinalXCoordinate(tileCol);
-                this.setFinalYCoordinate(tileRow);
+                this.finalXCoordinate = tileCol;
+                this.finalYCoordinate = tileRow;
             }
         }
         else if(isRightMouseButton(event))
@@ -71,60 +73,30 @@ public class MovePiece{
     
     public void doMove(BoardTiles tile)
     { 
-        if(!pMove.winningCondition())
+        if(!gameOver)
         {
-            pMove.getMoveCells(this.initialXCoordinate, this.initialYCoordinate, this.finalXCoordinate, this.finalYCoordinate);
-            clearValues();
-            gamePanel.updateInfo();
-            boardPanel.createPanels();
+            if(!pMove.winningCondition())
+            {
+                pMove.getMoveCells(this.initialXCoordinate, this.initialYCoordinate, this.finalXCoordinate, this.finalYCoordinate);
+                clearValues();
+                gamePanel.updateInfo();
+                boardPanel.createPanels();
+            }
+            if(pMove.winningCondition())
+            {
+                gamePanel.displayWin();
+                gamePanel.displayScore();
+                gameOver = true;
+            }
         }
-        if(pMove.winningCondition())
-        {
-            gamePanel.displayWin();
-            gamePanel.displayScore();
-        }
-        
     }
     
     public void clearValues()
     {
-        this.setInitialXCoordinate(null);
-        this.setInitialYCoordinate(null);
-        this.setFinalXCoordinate(null);
-        this.setFinalYCoordinate(null);
+        this.initialXCoordinate = null;
+        this.initialYCoordinate = null;
+        this.finalXCoordinate = null;
+        this.finalYCoordinate = null;
     }
-    
-    public Integer getInitialXCoordinate() {
-        return initialXCoordinate;
-    }
-
-    public void setInitialXCoordinate(Integer initialCoordinate) {
-        this.initialXCoordinate = initialCoordinate;
-    }
-
-    public Integer getFinalXCoordinate() {
-        return finalXCoordinate;
-    }
-
-    public void setFinalXCoordinate(Integer finalCoordinate) {
-        this.finalXCoordinate = finalCoordinate;
-    }
-    
-    public Integer getInitialYCoordinate() {
-        return initialYCoordinate;
-    }
-
-    public void setInitialYCoordinate(Integer initialCoordinate) {
-        this.initialYCoordinate = initialCoordinate;
-    }
-
-    public Integer getFinalYCoordinate() {
-        return finalYCoordinate;
-    }
-
-    public void setFinalYCoordinate(Integer finalCoordinate) {
-        this.finalYCoordinate = finalCoordinate;
-    }
-    
-    
+   
 }

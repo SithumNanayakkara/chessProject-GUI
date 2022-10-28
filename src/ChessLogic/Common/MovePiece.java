@@ -49,8 +49,11 @@ public class MovePiece{
         {
             if(this.initialXCoordinate == null || this.initialYCoordinate == null)
             {
-                this.initialXCoordinate = tileCol;
-                this.initialYCoordinate = tileRow;
+                if((chessBoard.getCell(tileCol, tileRow).getPiece()) != null)
+                {
+                    this.initialXCoordinate = tileCol;
+                    this.initialYCoordinate = tileRow;
+                }
             }
             else
             {

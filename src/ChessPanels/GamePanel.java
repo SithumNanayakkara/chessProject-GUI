@@ -81,23 +81,25 @@ public class GamePanel extends javax.swing.JPanel {
     
     public void updatePieceInfo(String piece)
     {
+        String[] pieceSplit = pieces[0].split(" ",0);
         this.jPanel2.remove(pieceLabel);
-        if(pieces[0] == "")
+        if(pieces[0].equals(""))
+        {
+            pieces[0] = piece;
+        }
+        else if( pieceSplit[0].equals("empty") && !pieces[0].equals(""))
         {
             pieces[0] = piece;
         }
         else 
             pieces[1] = piece;
         
-        
-        
         this.pieceLabel.setText("First click: " + pieces[0] +" Second click: " + pieces[1]);
         this.jPanel2.add(pieceLabel);
         this.pieceLabel.validate();
         this.pieceLabel.repaint();
         
-        
-        if(pieces[0] != "" && pieces[1] != "")
+        if(pieces[0].equals("") && pieces[1].equals(""))
         {
             pieces[0] = "";
             pieces[1] = "";

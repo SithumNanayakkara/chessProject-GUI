@@ -1,5 +1,19 @@
 <h1> Welcome to the chessProject-GUI </h1>
 
+<h2>Instructions</h2>
+
+To run the game:  
+
+go to the dist folder and double click on the folowing file:
+
+"ChessProject_GUI.jar"
+
+OR (if unsucessful)
+
+from the command line, go to the dist folder and type the following:
+
+java -jar "ChessProject_GUI.jar" 
+
 <h2>Here is a preview of the game so far</h2>
 
 <h3>Login Page</h3>

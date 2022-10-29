@@ -59,7 +59,11 @@ public class King extends Piece
         GameRules rules = new GameRules(board,initialPos.getXLocation(), initialPos.getYLocation(), finalPos.getXLocation(), finalPos.getYLocation());
         
         //Castling
-        if(this.isIsInitialMove() && rook.isIsInitialMove() && (finalPos.getYLocation()== initialPos.getYLocation()+2 || finalPos.getYLocation()== initialPos.getYLocation()-2))
+        if(this.isIsInitialMove() && rook.isIsInitialMove() 
+                                  && ((finalPos.getYLocation()== initialPos.getYLocation()+2 
+                                  && finalPos.getXLocation() - initialPos.getXLocation()==0)
+                                  ||(finalPos.getYLocation()== initialPos.getYLocation()-2 
+                                  && finalPos.getXLocation()-initialPos.getXLocation()==0)))
         {
             if(rules.isMovePathClear() == 0)
             {
@@ -90,7 +94,7 @@ public class King extends Piece
     {
         Move move = new Move(initialPos, finalPos);
         Piece tempPiece = move.getFinalC().getPiece();
-        
+
         move.getFinalC().setPiece(move.getInitialC().getPiece()); //adding piece temporarily
         move.getInitialC().setPiece(null);//remove the orignial piece temporily
         
@@ -102,7 +106,7 @@ public class King extends Piece
                 {
                     
                     move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
-                    move.getFinalC().setPiece(null); //removing temp piece
+                    move.getFinalC().setPiece(tempPiece); //removing temp piece
                     return true;
                 }
             }

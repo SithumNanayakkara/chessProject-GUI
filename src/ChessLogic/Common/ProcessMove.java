@@ -120,26 +120,26 @@ public class ProcessMove
         
         if(this.initialPiece == null) //if coordinates are null
         {
-            this.invalidMove = "Alert: Initial click contains no piece, please try again!";
+            this.invalidMove = "Alert: Initial click contains no piece!";
             System.out.println("\n" + invalidMove);
             return -1;
         }
         
         if(this.initialPiece.getColour()!= this.colour) //if opponents pices are moved
         {
-            this.invalidMove = "Alert: Can't move enemies pieces, please try again!";
+            this.invalidMove = "Alert: Can't move enemies pieces!";
             System.out.println("\n" + invalidMove);
             return -1;
         }
         if(this.initialPiece.allowedMove(this.board,move.getInitialC(), move.getFinalC()) == -1) //if illegal move
         {
-            this.invalidMove = "Alert: " +move.getInitialC().toString() + " can't move like that, please try again!";
+            this.invalidMove = "Alert: " +move.getInitialC().toString() + " can't move like that!";
             System.out.println("\n" + invalidMove);
             return -1;
         }
         if (this.initialPiece.allowedMove(this.board,move.getInitialC(), move.getFinalC()) == -2) //if king is getting checked
         {
-            this.invalidMove = ("Alert: " + move.getInitialC().toString() + " is getting checked by " + this.checkKing.getCheckBy() + ", please try again!");
+            this.invalidMove = ("Alert: " + move.getInitialC().toString() + " is getting checked by " + this.checkKing.getCheckBy() + "!");
             System.out.println("\n"+ invalidMove);
             return -1;   
         }
@@ -230,45 +230,46 @@ public class ProcessMove
      */
     public boolean isKingChecked(Move move)
     {
+        Piece tempPiece = move.getFinalC().getPiece();
         if(initialPiece.getColour() == Colour.White)
         {
             
             this.checkKing = new King(Colour.White);
             
             move.getFinalC().setPiece(move.getInitialC().getPiece()); //adding piece temporarily
-            move.getInitialC().setPiece(null);//remove the orignial piece temporily
+            move.getInitialC().setPiece(tempPiece);//remove the orignial piece temporily
             
             if(checkKing.alreadyCheck(board))        
             {
                 move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
-                move.getFinalC().setPiece(null); //removing temp piece
+                move.getFinalC().setPiece(tempPiece); //removing temp piece
                 
-                this.invalidMove = ("Alert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy() + " requires attention! Please try again!");
+                this.invalidMove = ("Alert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy() + " requires attention!");
                 System.out.println(invalidMove);
                 return true;
             }
             
             move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
-            move.getFinalC().setPiece(null); //removing temp piece
+            move.getFinalC().setPiece(tempPiece); //removing temp piece
         }
         else
         {
             this.checkKing = new King(Colour.Black);
             
             move.getFinalC().setPiece(move.getInitialC().getPiece()); //adding piece temporarily
-            move.getInitialC().setPiece(null);//remove the orignial piece temporily
+            move.getInitialC().setPiece(tempPiece);//remove the orignial piece temporily
 
             if(checkKing.alreadyCheck(board))        
             {
                 move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
-                move.getFinalC().setPiece(null); //removing temp piece
+                move.getFinalC().setPiece(tempPiece); //removing temp piece
                 
-                this.invalidMove = ("Alert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy() + " requires attention! Please try again!");
+                this.invalidMove = ("Alert: " + checkKing.toString() + " in check by " + this.checkKing.getCheckBy() + " requires attention!");
                 System.out.println(invalidMove);
                 return true;
             }
             move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
-            move.getFinalC().setPiece(null); //removing temp piece
+            move.getFinalC().setPiece(tempPiece); //removing temp piece
         }
         return false;
     }

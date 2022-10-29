@@ -2,15 +2,17 @@
 
 <h2>Instructions</h2>
 
-To run the game from the command line, 
+To run the game:  
 
-go to the dist folder and type the following:
+go to the dist folder and double click on the folowing file:
+
+"ChessProject_GUI.jar"
+
+OR (if unsucessful)
+
+from the command line, go to the dist folder and type the following:
 
 java -jar "ChessProject_GUI.jar" 
-
-OR
-
-go to the dist folder and double click on the "ChessProject_GUI.jar" file.
 
 <h2>Here is a preview of the game so far</h2>
 

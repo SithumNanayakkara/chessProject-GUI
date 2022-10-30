@@ -39,7 +39,6 @@ public class ProcessMove
         this.invalidMove = "";
         board = new Board ();
         movesPlayed = new ArrayList <String>();
-        setColour();
     }
     /**
      * Checks if the game is in a winning point (any checkmates)
@@ -57,6 +56,16 @@ public class ProcessMove
      * sets the colour for the correct turn
      * @return 
      */
+    
+    public void setTurn(int turn)
+    {
+        this.turn = turn;
+    }
+    
+    public int getTurn()
+    {
+        return this.turn;
+    }
     
     public void setColour()
     {
@@ -271,7 +280,7 @@ public class ProcessMove
             move.getInitialC().setPiece(move.getFinalC().getPiece()); //add back the original piece
             move.getFinalC().setPiece(tempPiece); //removing temp piece
         }
-        return false;
+        return false; 
     }
     //displays the log files one line at a time
     public void displayMoves()

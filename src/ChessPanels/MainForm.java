@@ -4,7 +4,7 @@
  */
 package ChessPanels;
 
-import ChessDataBase.processUserInfo;
+import ChessDataBase.processDataBase;
 import java.awt.CardLayout;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,7 +20,7 @@ public class MainForm extends javax.swing.JFrame {
     
     // private final 
     private final SwitchLoginRegisterPanel LRPanel;
-    private final processUserInfo processInfo;
+    private final processDataBase processInfo;
     private final CardLayout cardLayout;
     private MenuPanel MPanel;
     
@@ -31,7 +31,7 @@ public class MainForm extends javax.swing.JFrame {
         
         initComponents();
         LRPanel = new SwitchLoginRegisterPanel(this);
-        processInfo = new processUserInfo(LRPanel,this);
+        processInfo = new processDataBase(LRPanel,this);
         jPanel1.add(LRPanel,"1");
         cardLayout = (CardLayout) (jPanel1.getLayout());
         cardLayout.show(jPanel1,"1");

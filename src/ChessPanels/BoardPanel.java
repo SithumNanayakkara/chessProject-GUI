@@ -4,6 +4,7 @@
  */
 package ChessPanels;
 
+import ChessDataBase.processDataBase;
 import ChessLogic.Common.MovePiece;
 import ChessLogic.Board.Board;
 import ChessLogic.Common.ProcessMove;
@@ -34,7 +35,6 @@ public class BoardPanel extends javax.swing.JPanel {
         this.tiles = new ArrayList<>();
         this.movePiece = new MovePiece(pm,this,gp,cb);
         this.chessBoard = cb;
-        this.chessBoard.setup();
         this.gamePanel = gp;
         this.setSize(GAMEBOARD_PANEL_DIMENSION);
         this.setLocation(0, 0);
@@ -42,6 +42,7 @@ public class BoardPanel extends javax.swing.JPanel {
         this.validate( );
     }
     
+
     public final void createPanels()
     {
         this.removeAll();
@@ -56,7 +57,7 @@ public class BoardPanel extends javax.swing.JPanel {
         }
         this.validate();
         this.repaint();
-    }  
+    }    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

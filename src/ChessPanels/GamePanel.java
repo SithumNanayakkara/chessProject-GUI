@@ -4,9 +4,9 @@
  */
 package ChessPanels;
 
-import ChessDataBase.DBUserInfo;
+import ChessDataBase.UserDataBase;
 import ChessDataBase.User;
-import ChessDataBase.processUserInfo;
+import ChessDataBase.processDataBase;
 import ChessLogic.Board.Board;
 import ChessLogic.Common.Colour;
 import ChessLogic.Common.ProcessMove;
@@ -28,21 +28,26 @@ public class GamePanel extends javax.swing.JPanel {
     private final Board chessBoard;
     private final MenuPanel menuPanel;
     private final BoardPanel boardPanel;
-    private final processUserInfo info;
+    private final processDataBase info;
     private final ProcessMove pm;
     private final Color colour1 = new java.awt.Color(0,204,204);//new java.awt.Color(204,255,255);
     private final Color colour2 = new java.awt.Color(0,102,102);
     private final String [] pieces;
+    private boolean won;
 
     /**
      * Creates new form GamePanel
      */
-    public GamePanel(MenuPanel menu, processUserInfo info) {
+    public GamePanel(MenuPanel menu, processDataBase info, boolean isnewgame) {
         initComponents();
         pieces  = new String [] {"",""};
         this.info = info;
         this.chessBoard = new Board();
         this.pm = new ProcessMove();
+        this.won = false;
+        
+        this.isNewGame(isnewgame);
+        pm.setColour();
         this.boardPanel = new BoardPanel(this,pm,chessBoard);
         this.add(boardPanel);
         this.menuPanel = menu;
@@ -59,6 +64,19 @@ public class GamePanel extends javax.swing.JPanel {
         GradientPaint gp = new GradientPaint(0, 0, colour1, 1920, 720, colour2);
         g2d.setPaint(gp);
         g2d.fillRect(0, 0, 1920, 720);
+    }
+    
+    public void isNewGame(boolean isnewgame)
+    {
+        if(isnewgame)
+        {
+            this.chessBoard.setup();
+        }
+        else
+        {
+            this.loadProgress();
+            pm.setTurn(info.getTurn());
+        }
     }
     
     public void updateInfo ()
@@ -131,7 +149,9 @@ public class GamePanel extends javax.swing.JPanel {
             this.info.updateDB();
             this.turnsLabel.setText("BLACK WINS!");
         }
-        
+        this.won = true;
+        this.info.setGameSaved(false);
+        //this.menuPanel.getLoadGameBtn().setEnabled(false);
         this.jPanel2.add(turnsLabel);
         this.turnsLabel.validate();
         this.turnsLabel.repaint();
@@ -152,8 +172,29 @@ public class GamePanel extends javax.swing.JPanel {
         this.invalidMoveLabel.validate();
         this.invalidMoveLabel.repaint();
     }
-            
     
+    public void loadProgress()
+    {
+        info.getProgressTableInfo(chessBoard);
+    }
+    
+    public void saveProgress()
+    {
+        info.setClearProgress();
+        for (int c=0; c<8; c++)
+        {
+            for (int r=0; r<8; r++)
+            {
+                if((chessBoard.getCell(c, r).getPiece()) != null)
+                {
+                    info.setProgressTableInfo(chessBoard.getCell(c, r).getPiece().toString(), c, r);
+                }
+                else
+                    info.setProgressTableInfo("null", c, r);
+            }
+        }
+        System.out.println("Inserted progress into DB");
+    }   
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -259,8 +300,14 @@ public class GamePanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackToMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToMenuActionPerformed
+        if(!this.won)
+        {
+            this.info.setGameSaved(true);
+        }
         this.menuPanel.setupCard();
         this.menuPanel.updateScore();
+        this.info.setTurn(pm.getTurn());
+        this.saveProgress();
     }//GEN-LAST:event_btnBackToMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

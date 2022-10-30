@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
  */
 public class DBUserInfoTest {
     
-    private DBUserInfo DBUser;
+    private UserDataBase DBUser;
     
     
     public DBUserInfoTest() {
@@ -45,7 +45,7 @@ public class DBUserInfoTest {
     @Test
     public void testGetInstance() {
         System.out.println("getInstance");
-        DBUserInfo expResult = DBUserInfo.getInstance();
+        UserDataBase expResult = UserDataBase.getInstance();
     }
 
     /**
@@ -54,7 +54,7 @@ public class DBUserInfoTest {
     @Test
     public void testSetupChessDB() {
         System.out.println("setupChessDB");
-        DBUserInfo instance = new DBUserInfo();
+        UserDataBase instance = new UserDataBase();
         instance.setupChessDB();
     }
 
@@ -65,7 +65,7 @@ public class DBUserInfoTest {
     public void testCheckExistedTable() {
         System.out.println("checkExistedTable");
         String name = "ChessUserInfo";
-        DBUserInfo instance = new DBUserInfo();
+        UserDataBase instance = new UserDataBase();
         boolean expResult = false;
         boolean result = instance.checkExistedTable(name);
         assertEquals(expResult, result);
@@ -79,7 +79,7 @@ public class DBUserInfoTest {
         System.out.println("loginUser");
         String userName = "Sithum";
         String password = "sithum";
-        DBUserInfo instance = new DBUserInfo();
+        UserDataBase instance = new UserDataBase();
         boolean expResult = true;
         boolean result = instance.loginUser(userName, password);
         assertEquals(expResult, result);
@@ -94,7 +94,7 @@ public class DBUserInfoTest {
         System.out.println("loginUser");
         String userName = "wrongusername";
         String password = "wrongpassword";
-        DBUserInfo instance = new DBUserInfo();
+        UserDataBase instance = new UserDataBase();
         boolean expResult = false;
         boolean result = instance.loginUser(userName, password);
         assertEquals(expResult, result);
@@ -108,8 +108,8 @@ public class DBUserInfoTest {
         System.out.println("loadUser");
         String userName = "Sithum";
         String password = "sithum";
-        DBUserInfo instance = new DBUserInfo();
-        User expResult = new User("Sithum","sithum","sithum_nanayakkara@outlook.com",60);
+        UserDataBase instance = new UserDataBase();
+        User expResult = new User("Sithum","sithum","sithum_nanayakkara@outlook.com",60,false,0);
         User result = instance.loadUser(userName, password);
         assertEquals(expResult.getUserName(), result.getUserName());
         assertEquals(expResult.getEmail(), result.getEmail());
@@ -127,7 +127,7 @@ public class DBUserInfoTest {
         String userName = "test";
         String email = "test";
         String password = "test";
-        DBUserInfo instance = new DBUserInfo();
+        UserDataBase instance = new UserDataBase();
         boolean expResult = true;
         boolean result = instance.registerUser(userName, email, password);
         assertEquals(expResult, result);
@@ -139,7 +139,7 @@ public class DBUserInfoTest {
     @Test
     public void testCloseConnections() {
         System.out.println("closeConnections");
-        DBUserInfo instance = new DBUserInfo();
+        UserDataBase instance = new UserDataBase();
         instance.closeConnections();
     }
 
@@ -149,8 +149,8 @@ public class DBUserInfoTest {
     @Test
     public void testUpdateScore() {
         System.out.println("updateScore");
-        User user = new User("test","test","test",10);
-        DBUserInfo instance = new DBUserInfo();
+        User user = new User("test","test","test",10,false,0);
+        UserDataBase instance = new UserDataBase();
         instance.updateScore(user);
     }
     

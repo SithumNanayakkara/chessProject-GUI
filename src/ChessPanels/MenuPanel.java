@@ -4,11 +4,11 @@
  */
 package ChessPanels;
 
-import ChessDataBase.processUserInfo;
+import ChessDataBase.processDataBase;
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.YES_NO_OPTION;
 
 /**
  *
@@ -16,25 +16,24 @@ import javax.swing.JLabel;
  */
 public class MenuPanel extends javax.swing.JPanel {
     
-    private final processUserInfo info;
+    private final processDataBase info;
     private final MainForm form;
     private final RulesPanel rulesPanel;
     private CardLayout cardLayout;
-
 
     /**
      * Creates new panel MenuPanel
      * @param form
      */
-    public MenuPanel(MainForm form, processUserInfo info) 
+    public MenuPanel(MainForm form, processDataBase info) 
     {
         initComponents();
         this.form = form;
         rulesPanel = new RulesPanel(this);
         this.info = info;
+        
         setupCard();
     }
-    
     
     public void welcomeName(String name)
     {
@@ -44,6 +43,13 @@ public class MenuPanel extends javax.swing.JPanel {
     
     public void setupCard()
     {
+        if(info.isGameSaved())
+        {
+            this.btnLoadGame.setEnabled(true);
+        }
+        else 
+            this.btnLoadGame.setEnabled(false);
+        
         this.add(jPanel1,"Main");
         this.add(rulesPanel,"Rules");
         cardLayout = (CardLayout) (this.getLayout());
@@ -59,7 +65,10 @@ public class MenuPanel extends javax.swing.JPanel {
         this.lblScore.repaint();
     }
     
-    
+    public JButton getLoadGameBtn()
+    {
+        return btnLoadGame;
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -93,6 +102,11 @@ public class MenuPanel extends javax.swing.JPanel {
         btnLoadGame.setBorderPainted(false);
         btnLoadGame.setContentAreaFilled(false);
         btnLoadGame.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLoadGame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadGameActionPerformed(evt);
+            }
+        });
 
         btnRules.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
         btnRules.setForeground(new java.awt.Color(204, 255, 255));
@@ -144,6 +158,11 @@ public class MenuPanel extends javax.swing.JPanel {
         btnExit.setBorderPainted(false);
         btnExit.setContentAreaFilled(false);
         btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         lblScore.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         lblScore.setForeground(new java.awt.Color(204, 255, 255));
@@ -156,18 +175,14 @@ public class MenuPanel extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(100, 100, 100)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLoadGame, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnExit)
-                            .addComponent(btnNewGame)
-                            .addComponent(btnRules))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblScore, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(580, Short.MAX_VALUE))))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnLoadGame, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnExit)
+                        .addComponent(btnNewGame)
+                        .addComponent(btnRules))
+                    .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblScore, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnLogout)
@@ -205,11 +220,38 @@ public class MenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRulesActionPerformed
 
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
-        final GamePanel gamePanel = new GamePanel(this,this.info);
-        this.add(gamePanel, "Game");
-        cardLayout.show(this, "Game");
+        if(!info.isGameSaved())
+        {
+            final GamePanel gamePanel = new GamePanel(this,this.info,true);
+            this.add(gamePanel, "Game");
+            cardLayout.show(this, "Game");
+        }
+        else
+        {
+            int choice = JOptionPane.showConfirmDialog(this,"Starting a new game will overwrite the previous saved game! Are you sure you want to proced?", "Question", YES_NO_OPTION );
+            if(choice == JOptionPane.YES_OPTION)
+            {   
+                final GamePanel gamePanel = new GamePanel(this,this.info,true);
+                this.add(gamePanel, "Game");
+                cardLayout.show(this, "Game");
+            }
+        }
     }//GEN-LAST:event_btnNewGameActionPerformed
 
+    private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
+        
+        final GamePanel gamePanel = new GamePanel(this,this.info,false);
+        this.add(gamePanel, "Game");
+        cardLayout.show(this, "Game");
+    }//GEN-LAST:event_btnLoadGameActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        int choice = JOptionPane.showConfirmDialog(this,"Are you sure you want to exit?", "Thank you for playing!", YES_NO_OPTION );
+            if(choice == JOptionPane.YES_OPTION)
+            {   
+                System.exit(0);
+            }
+    }//GEN-LAST:event_btnExitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;

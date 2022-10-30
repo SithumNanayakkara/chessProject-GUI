@@ -4,9 +4,9 @@
  */
 package ChessPanels;
 
-import ChessDataBase.DBUserInfo;
+import ChessDataBase.UserDataBase;
 import ChessDataBase.User;
-import ChessDataBase.processUserInfo;
+import ChessDataBase.processDataBase;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

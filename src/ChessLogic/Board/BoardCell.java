@@ -10,14 +10,14 @@ public class BoardCell
 {
     private int xLocation;
     private int yLocation;
-    private Piece pieceIs;
+    private Piece pieceIs; 
 
     public BoardCell(int xLocation, int yLocation, Piece piece) {
         this.xLocation = xLocation;
         this.yLocation = yLocation;
         this.pieceIs = piece;
     }
-
+    
     public int getXLocation() {
         return xLocation;
     }

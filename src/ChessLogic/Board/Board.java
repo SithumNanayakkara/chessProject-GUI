@@ -6,6 +6,7 @@ import ChessLogic.Piece.Queen;
 import ChessLogic.Piece.King;
 import ChessLogic.Piece.Bishop;
 import ChessLogic.Piece.Knight;
+import ChessLogic.Piece.Piece;
 import ChessLogic.Piece.Rook;
 
 /**
@@ -64,10 +65,69 @@ public class Board
             {
                 if(cells [i][j] == null)
                 {
-                    cells[i][j] = new BoardCell(i, j, null );
+                    cells[i][j] = new BoardCell(i, j, null);
                 }
             }
         }
+    }
+    
+    public void loadSavedCells(String piece,int x ,int y)
+    {
+        
+        if(piece == null)
+        {
+            cells[x][y] = new BoardCell(x, y, null );
+        }
+        else if(new Rook(Colour.White).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Rook(Colour.White));
+        }
+        else if(new Rook(Colour.Black).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Rook(Colour.Black));
+        }
+        else if(new Pawn(Colour.Black).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Pawn(Colour.Black));
+        }
+        else if(new Pawn(Colour.White).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Pawn(Colour.White));
+        }
+        else if(new King(Colour.Black).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new King(Colour.Black));
+        }
+        else if(new King(Colour.White).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new King(Colour.White));
+        }
+        else if(new Queen(Colour.Black).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Queen(Colour.Black));
+        }
+        else if(new Queen(Colour.White).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Queen(Colour.White));
+        }
+        else if(new Bishop(Colour.Black).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Bishop(Colour.Black));
+        }
+        else if(new Bishop(Colour.White).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Bishop(Colour.White));
+        }
+        else if(new Knight(Colour.Black).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Bishop(Colour.Black));
+        }
+        else if(new Knight(Colour.White).toString().equals(piece))
+        {
+            cells[x][y] = new BoardCell(x,y,new Knight(Colour.White));
+        }
+        else
+            cells[x][y] = new BoardCell(x, y, null);
     }
     /**
      * gets the cell coordinates

@@ -246,7 +246,7 @@ public class ProcessMove
             this.checkKing = new King(Colour.White);
             
             move.getFinalC().setPiece(move.getInitialC().getPiece()); //adding piece temporarily
-            move.getInitialC().setPiece(tempPiece);//remove the orignial piece temporily
+            move.getInitialC().setPiece(null);//remove the orignial piece temporily
             
             if(checkKing.alreadyCheck(board))        
             {
@@ -266,7 +266,7 @@ public class ProcessMove
             this.checkKing = new King(Colour.Black);
             
             move.getFinalC().setPiece(move.getInitialC().getPiece()); //adding piece temporarily
-            move.getInitialC().setPiece(tempPiece);//remove the orignial piece temporily
+            move.getInitialC().setPiece(null);//remove the orignial piece temporily
 
             if(checkKing.alreadyCheck(board))        
             {

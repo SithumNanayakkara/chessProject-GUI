@@ -35,6 +35,12 @@ public class BoardTiles extends javax.swing.JPanel {
     private final int tileRow;
     /**
      * Creates new form NewJPanel
+     * @param panels
+     * @param tileCol
+     * @param tileRow
+     * @param mp
+     * @param cb
+     * @param gp
      */
     public BoardTiles(BoardPanel panels,int tileCol, int tileRow, MovePiece mp , Board cb, GamePanel gp) {
         initComponents();
@@ -48,7 +54,7 @@ public class BoardTiles extends javax.swing.JPanel {
         validate();
     }
     
-    public void setPiece()
+    private void setPiece()
     {
         this.removeAll();
         if((board.getCell(tileCol, tileRow).getPiece()) != null)

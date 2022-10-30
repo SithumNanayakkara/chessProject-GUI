@@ -14,6 +14,7 @@ public class RulesPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form RulesPanel
+     * @param menu
      */
     public RulesPanel(MenuPanel menu) {
         initComponents();

@@ -1,4 +1,4 @@
-/*
+ /*
  * 
  * Author: Sithum Nanayakkara
  */
@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 public class BoardPanel extends javax.swing.JPanel {
   
-    final List<BoardTiles> tiles;
+    //final List<BoardTiles> tiles;
     private final Board chessBoard;
     private final MovePiece movePiece;
     private final GamePanel gamePanel;
@@ -32,7 +32,7 @@ public class BoardPanel extends javax.swing.JPanel {
      */
     public BoardPanel(GamePanel gp, ProcessMove pm, Board cb) {
         initComponents();
-        this.tiles = new ArrayList<>();
+        //this.tiles = new ArrayList<>();
         this.movePiece = new MovePiece(pm,this,gp,cb);
         this.chessBoard = cb;
         this.gamePanel = gp;
@@ -52,7 +52,7 @@ public class BoardPanel extends javax.swing.JPanel {
             {
                 final BoardTiles tilePanel = new BoardTiles(this,c,r,movePiece, chessBoard, gamePanel);
                 this.add(tilePanel);
-                this.tiles.add(tilePanel);
+                //this.tiles.add(tilePanel);
             }
         }
         this.validate();

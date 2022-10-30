@@ -24,6 +24,7 @@ public class MenuPanel extends javax.swing.JPanel {
     /**
      * Creates new panel MenuPanel
      * @param form
+     * @param info
      */
     public MenuPanel(MainForm form, processDataBase info) 
     {
@@ -41,7 +42,7 @@ public class MenuPanel extends javax.swing.JPanel {
         updateScore();
     }
     
-    public void setupCard()
+    public final void setupCard()
     {
         if(info.isGameSaved())
         {
@@ -69,6 +70,7 @@ public class MenuPanel extends javax.swing.JPanel {
     {
         return btnLoadGame;
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -239,7 +241,6 @@ public class MenuPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNewGameActionPerformed
 
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
-        
         final GamePanel gamePanel = new GamePanel(this,this.info,false);
         this.add(gamePanel, "Game");
         cardLayout.show(this, "Game");
@@ -247,10 +248,10 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int choice = JOptionPane.showConfirmDialog(this,"Are you sure you want to exit?", "Thank you for playing!", YES_NO_OPTION );
-            if(choice == JOptionPane.YES_OPTION)
-            {   
-                System.exit(0);
-            }
+        if(choice == JOptionPane.YES_OPTION)
+        {   
+            System.exit(0);
+        }
     }//GEN-LAST:event_btnExitActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

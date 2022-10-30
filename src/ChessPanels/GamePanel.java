@@ -4,27 +4,20 @@
  */
 package ChessPanels;
 
-import ChessDataBase.UserDataBase;
-import ChessDataBase.User;
 import ChessDataBase.processDataBase;
 import ChessLogic.Board.Board;
-import ChessLogic.Common.Colour;
 import ChessLogic.Common.ProcessMove;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
-import java.util.HashSet;
 
 /**
  *
  * @author Sithum Nanayakkara <fhb7119@autuni.ac.nz>
  */
 public class GamePanel extends javax.swing.JPanel {
-
-    //private final DBUserInfo DB;
-    //private User user;
     private final Board chessBoard;
     private final MenuPanel menuPanel;
     private final BoardPanel boardPanel;
@@ -66,7 +59,7 @@ public class GamePanel extends javax.swing.JPanel {
         g2d.fillRect(0, 0, 1920, 720);
     }
     
-    public void isNewGame(boolean isnewgame)
+    private void isNewGame(boolean isnewgame)
     {
         if(isnewgame)
         {
@@ -147,11 +140,10 @@ public class GamePanel extends javax.swing.JPanel {
         {
             decreaseScore();
             this.info.updateDB();
-            this.turnsLabel.setText("BLACK WINS!");
+            this.turnsLabel.setText("BLACK WINS! (Guest)");
         }
         this.won = true;
         this.info.setGameSaved(false);
-        //this.menuPanel.getLoadGameBtn().setEnabled(false);
         this.jPanel2.add(turnsLabel);
         this.turnsLabel.validate();
         this.turnsLabel.repaint();

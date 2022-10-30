@@ -16,16 +16,10 @@ public class ProcessMove
 {
     private King checkKing;
     private Colour colour;
-    private final Board board;
-    private final List<String> movesPlayed;
-    
     private Piece initialPiece, finalPiece;
-    private String initalCoordinate, finalCoordinate;
+    private final Board board;
     private int turn, initialRank, initialFile,finalRank, finalFile;
-    
     private String invalidMove;
-    
-    
     
     public ProcessMove () 
     {
@@ -38,7 +32,6 @@ public class ProcessMove
         this.finalPiece = null;
         this.invalidMove = "";
         board = new Board ();
-        movesPlayed = new ArrayList <String>();
     }
     /**
      * Checks if the game is in a winning point (any checkmates)
@@ -53,7 +46,7 @@ public class ProcessMove
     }
     
     /**
-     * sets the colour for the correct turn
+     * sets the color for the correct turn
      * @return 
      */
     
@@ -89,7 +82,7 @@ public class ProcessMove
         return invalidMove;
     }
     
-     public boolean winningCondition ()
+    public boolean winningCondition ()
     {
         checkKing = new King(this.colour);
         return checkKing.isCheckMate(board);
@@ -174,7 +167,7 @@ public class ProcessMove
         move.getInitialC().setPiece(null);
         
         //sotres the moves to show logs later on
-        movesPlayed.add((turn+1)+" "+this.initalCoordinate + " " +this.initialPiece.toString() + " to " + this.finalCoordinate );
+        //movesPlayed.add((turn+1)+" "+this.initalCoordinate + " " +this.initialPiece.toString() + " to " + this.finalCoordinate );
         
         this.turn++;
         setColour();
@@ -282,14 +275,7 @@ public class ProcessMove
         }
         return false; 
     }
-    //displays the log files one line at a time
-    public void displayMoves()
-    {
-        for(String moves: this.movesPlayed)
-        {
-             System.out.println(moves);
-        }
-    }
+    
     //checks which colour is moving 
     public boolean isWhite ()
     {

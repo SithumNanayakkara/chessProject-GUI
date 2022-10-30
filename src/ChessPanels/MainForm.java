@@ -39,7 +39,7 @@ public class MainForm extends javax.swing.JFrame {
         this.setVisible(true);
     }
     
-    public void setBackground()
+    private void setBackground()
     {
         try {
             jLabel2.setIcon( new ImageIcon(ImageIO.read(getClass().getResource("/resources/BkgImage.jpg"))));
@@ -52,12 +52,14 @@ public class MainForm extends javax.swing.JFrame {
     {
         cardLayout.show(jPanel1,"1");
     }
+    
     public void showCard2 ()
     {
         MPanel = new MenuPanel(this,processInfo);
         jPanel1.add(MPanel,"2");
         cardLayout.show(jPanel1,"2");
     }
+    
     public void setMenuName(String name)
     {
         MPanel.welcomeName(name);

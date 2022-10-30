@@ -120,7 +120,7 @@ public class Board
         }
         else if(new Knight(Colour.Black).toString().equals(piece))
         {
-            cells[x][y] = new BoardCell(x,y,new Bishop(Colour.Black));
+            cells[x][y] = new BoardCell(x,y,new Knight(Colour.Black));
         }
         else if(new Knight(Colour.White).toString().equals(piece))
         {

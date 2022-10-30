@@ -2,7 +2,7 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessDataBase;
+package ChessInfo;
 
 import ChessBoard.Board;
 import ChessBoard.BoardCell;

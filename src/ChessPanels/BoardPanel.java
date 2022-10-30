@@ -4,7 +4,7 @@
  */
 package ChessPanels;
 
-import ChessDataBase.processDataBase;
+import ChessInfo.processDataBase;
 import ChessCommon.MovePiece;
 import ChessBoard.Board;
 import ChessCommon.ProcessMove;

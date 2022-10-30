@@ -2,8 +2,10 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessDataBase;
+package ChessInfo;
 
+import ChessInfo.User;
+import ChessInfo.UserDataBase;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

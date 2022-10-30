@@ -4,7 +4,7 @@
  */
 package ChessPanels;
 
-import ChessDataBase.processDataBase;
+import ChessInfo.processDataBase;
 import java.awt.CardLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;

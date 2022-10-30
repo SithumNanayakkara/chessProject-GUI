@@ -2,7 +2,7 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessDataBase;
+package ChessInfo;
 
 import ChessBoard.BoardCell;
 import java.sql.Connection;

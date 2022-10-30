@@ -2,7 +2,6 @@ package ChessCommon;
 
 import ChessBoard.BoardCell;
 import ChessPiece.Piece;
-import java.util.List;
 
 /**
  *
@@ -53,10 +52,5 @@ public class Move
     public void setMovedPiece(Piece movedPiece) {
         this.movedPiece = movedPiece;
     }
-
-   
-    
-    
- 
 }
  

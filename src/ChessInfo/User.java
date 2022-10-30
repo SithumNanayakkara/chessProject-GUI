@@ -1,4 +1,4 @@
-package ChessDataBase;
+package ChessInfo;
 
 /**
  *

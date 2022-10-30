@@ -5,9 +5,9 @@
 package ChessPanels;
 
 import ChessDataBase.processDataBase;
-import ChessLogic.Common.MovePiece;
-import ChessLogic.Board.Board;
-import ChessLogic.Common.ProcessMove;
+import ChessCommon.MovePiece;
+import ChessBoard.Board;
+import ChessCommon.ProcessMove;
 import java.awt.Dimension;
 import java.util.List;
 import java.util.ArrayList;

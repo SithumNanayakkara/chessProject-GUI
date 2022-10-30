@@ -4,9 +4,9 @@
  */
 package ChessPanels;
 
-import ChessLogic.Common.MovePiece;
-import ChessLogic.Board.Board;
-import ChessLogic.Common.ProcessMove;
+import ChessCommon.MovePiece;
+import ChessBoard.Board;
+import ChessCommon.ProcessMove;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;

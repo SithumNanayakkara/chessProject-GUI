@@ -2,11 +2,11 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessLogic.Common;
+package ChessCommon;
 
-import ChessLogic.Board.Board;
-import ChessLogic.Board.BoardCell;
-import ChessLogic.Piece.King;
+import ChessBoard.Board;
+import ChessBoard.BoardCell;
+import ChessPiece.King;
 
 /**
  *

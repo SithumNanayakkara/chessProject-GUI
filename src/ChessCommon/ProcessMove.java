@@ -1,11 +1,9 @@
-package ChessLogic.Common;
+package ChessCommon;
 
-import ChessLogic.Piece.King;
-import ChessLogic.Board.Board;
-import ChessLogic.Piece.Piece;
-import ChessLogic.Board.BoardCell;
-import java.util.ArrayList;
-import java.util.List;
+import ChessPiece.King;
+import ChessBoard.Board;
+import ChessPiece.Piece;
+import ChessBoard.BoardCell;
 
 /**
  *

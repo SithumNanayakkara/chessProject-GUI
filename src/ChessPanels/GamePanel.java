@@ -5,8 +5,8 @@
 package ChessPanels;
 
 import ChessDataBase.processDataBase;
-import ChessLogic.Board.Board;
-import ChessLogic.Common.ProcessMove;
+import ChessBoard.Board;
+import ChessCommon.ProcessMove;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;

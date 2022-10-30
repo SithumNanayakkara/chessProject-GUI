@@ -2,12 +2,12 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessLogic.Piece;
+package ChessPiece;
 
-import ChessLogic.Board.Board;
-import ChessLogic.Board.BoardCell;
-import ChessLogic.Common.Colour;
-import ChessLogic.Common.GameRules;
+import ChessBoard.Board;
+import ChessBoard.BoardCell;
+import ChessCommon.Colour;
+import ChessCommon.GameRules;
 
 /**
  *

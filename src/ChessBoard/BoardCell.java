@@ -1,6 +1,6 @@
-package ChessLogic.Board;
+package ChessBoard;
 
-import ChessLogic.Piece.Piece;
+import ChessPiece.Piece;
 
 /**
  *

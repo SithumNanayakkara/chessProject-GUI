@@ -4,7 +4,7 @@
  */
 package ChessDataBase;
 
-import ChessLogic.Board.BoardCell;
+import ChessBoard.BoardCell;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;

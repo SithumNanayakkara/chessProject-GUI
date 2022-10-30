@@ -2,9 +2,9 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessLogic.Common;
+package ChessCommon;
 
-import ChessLogic.Board.Board;
+import ChessBoard.Board;
 import ChessPanels.BoardPanel;
 import ChessPanels.BoardTiles;
 import ChessPanels.GamePanel;

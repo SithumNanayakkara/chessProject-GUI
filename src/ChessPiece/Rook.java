@@ -1,10 +1,10 @@
-package ChessLogic.Piece;
+package ChessPiece;
 
-import ChessLogic.Board.Board;
-import ChessLogic.Board.BoardCell;
-import ChessLogic.Common.Colour;
-import ChessLogic.Common.GameRules;
-import ChessLogic.Common.ProcessMove;
+import ChessBoard.Board;
+import ChessBoard.BoardCell;
+import ChessCommon.Colour;
+import ChessCommon.GameRules;
+import ChessCommon.ProcessMove;
 
 /**
  *

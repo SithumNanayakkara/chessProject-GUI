@@ -1,7 +1,7 @@
-package ChessLogic.Common;
+package ChessCommon;
 
-import ChessLogic.Board.BoardCell;
-import ChessLogic.Piece.Piece;
+import ChessBoard.BoardCell;
+import ChessPiece.Piece;
 import java.util.List;
 
 /**

@@ -1,13 +1,13 @@
-package ChessLogic.Board;
+package ChessBoard;
 
-import ChessLogic.Common.Colour;
-import ChessLogic.Piece.Pawn;
-import ChessLogic.Piece.Queen;
-import ChessLogic.Piece.King;
-import ChessLogic.Piece.Bishop;
-import ChessLogic.Piece.Knight;
-import ChessLogic.Piece.Piece;
-import ChessLogic.Piece.Rook;
+import ChessCommon.Colour;
+import ChessPiece.Pawn;
+import ChessPiece.Queen;
+import ChessPiece.King;
+import ChessPiece.Bishop;
+import ChessPiece.Knight;
+import ChessPiece.Piece;
+import ChessPiece.Rook;
 
 /**
  *

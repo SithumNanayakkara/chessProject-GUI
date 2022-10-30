@@ -4,8 +4,8 @@
  */
 package ChessDataBase;
 
-import ChessLogic.Board.Board;
-import ChessLogic.Board.BoardCell;
+import ChessBoard.Board;
+import ChessBoard.BoardCell;
 import ChessPanels.MainForm;
 import ChessPanels.SwitchLoginRegisterPanel;
 import javax.swing.JOptionPane;

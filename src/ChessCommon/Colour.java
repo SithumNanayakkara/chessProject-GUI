@@ -1,4 +1,4 @@
-package ChessLogic.Common;
+package ChessCommon;
 
 /**
  *

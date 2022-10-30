@@ -2,12 +2,14 @@
  * 
  * Author: Sithum Nanayakkara
  */
-package ChessLogic.Piece;
+package ChessPiece;
 
-import ChessLogic.Board.Board;
-import ChessLogic.Board.BoardCell;
-import ChessLogic.Common.Colour;
-import static ChessLogic.Piece.PawnTest.cells;
+import ChessPiece.Knight;
+import ChessPiece.Pawn;
+import ChessBoard.Board;
+import ChessBoard.BoardCell;
+import ChessCommon.Colour;
+import static ChessPiece.PawnTest.cells;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;

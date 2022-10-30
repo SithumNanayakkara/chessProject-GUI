@@ -184,6 +184,11 @@ public class King extends Piece
             {
                 for(BoardCell cell : cells)
                 {
+                    if(cell.getPiece() == null && !(cell.getPiece() instanceof King) && !this.isCheck(this.kingLocation(board), cell, board) && this.allowedMove(board, this.kingLocation(board), cell) != -1)
+                    {
+                        return false;
+                    }
+                    
                     //check if other pieces can kill
                     if(cell.getPiece() != null && !(cell.getPiece() instanceof King) && cell.getPiece().allowedMove(board, cell, this.checkBy) != -1)
                     {

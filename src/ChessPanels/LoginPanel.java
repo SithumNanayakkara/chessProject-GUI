@@ -21,27 +21,43 @@ public class LoginPanel extends javax.swing.JPanel {
     {
         initComponents();
     }
-    
+    /**
+     * @return the back to register button
+     */
     public JButton getBtnBackToRegister() {
         return btnBackToRegister;
     }
-
+    /**
+     * 
+     * @return  the login button
+     */
     public JButton getBtnLogin() {
         return btnLogin;
     }
-    
+    /**
+     * 
+     * @return the password field
+     */
     public JPasswordField getPasswordField() {
         return txtLoginPw;
     }
-
+    /**
+     * 
+     * @return the username field 
+     */
     public JTextField getUserField() {
         return txtLoginUser;
     }
-    
+    /**
+     * 
+     * @return login panel 
+     */
     public LoginPanel getLoginPanel(){
         return this;
     }
-    
+    /**
+     * clears the password and username fields
+     */
     public void clearFields()
     {
         txtLoginUser.setText("");

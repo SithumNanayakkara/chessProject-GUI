@@ -35,13 +35,18 @@ public class MenuPanel extends javax.swing.JPanel {
         
         setupCard();
     }
-    
+    /**
+     * @param name shows the name in the menu
+     */
     public void welcomeName(String name)
     {
         lblWelcome.setText("Hi "+ name + "!");
         updateScore();
     }
-    
+    /**
+     * sets up the menu panel, depending on the saved game status the 
+     * load game button will be greyed out
+     */
     public final void setupCard()
     {
         if(info.isGameSaved())
@@ -56,7 +61,9 @@ public class MenuPanel extends javax.swing.JPanel {
         cardLayout = (CardLayout) (this.getLayout());
         cardLayout.show(this, "Main");
     }
-    
+    /**
+     * updates the users score in the menu screen
+     */
     public void updateScore()
     {
         this.jPanel1.remove(lblScore);
@@ -65,7 +72,10 @@ public class MenuPanel extends javax.swing.JPanel {
         this.lblScore.validate();
         this.lblScore.repaint();
     }
-    
+    /**
+     * 
+     * @return load game button
+     */
     public JButton getLoadGameBtn()
     {
         return btnLoadGame;
@@ -220,7 +230,10 @@ public class MenuPanel extends javax.swing.JPanel {
     private void btnRulesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRulesActionPerformed
         cardLayout.show(this, "Rules");
     }//GEN-LAST:event_btnRulesActionPerformed
-
+    /**
+     * the setup if a new game button is pressed
+     * @param evt 
+     */
     private void btnNewGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewGameActionPerformed
         if(!info.isGameSaved())
         {
@@ -239,13 +252,19 @@ public class MenuPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_btnNewGameActionPerformed
-
+    /**
+     * setup for if load game button is pressed
+     * @param evt 
+     */
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
         final GamePanel gamePanel = new GamePanel(this,this.info,false);
         this.add(gamePanel, "Game");
         cardLayout.show(this, "Game");
     }//GEN-LAST:event_btnLoadGameActionPerformed
-
+    /**
+     * if the exit button is pressed
+     * @param evt 
+     */
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         int choice = JOptionPane.showConfirmDialog(this,"Are you sure you want to exit?", "Thank you for playing!", YES_NO_OPTION );
         if(choice == JOptionPane.YES_OPTION)

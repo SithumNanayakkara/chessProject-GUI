@@ -27,10 +27,13 @@ public final class UserDataBase {
     private static final String PASSWORD = "Chess"; // DB password
     private static final String URL = "jdbc:derby:ChessUserInfo; create=true";//url of the DB host
     
-   // private final DBConnection dbConnect;
     private Connection conn;
     private Statement statement;
     
+    /**
+     * constructor which calls the establish connection method 
+     * which establishes the connection with the derby embedded server
+     */
     protected UserDataBase()
     {
         if(!establishConnection())
@@ -46,7 +49,10 @@ public final class UserDataBase {
         setupChessDB();
         System.out.println(this.conn);
     }
-    
+    /**
+     * gets the instance of this class as it is a protected class (singleton pattern)
+     * @return 
+     */
     public static UserDataBase getInstance()
     {
          if (db == null)  
@@ -71,7 +77,10 @@ public final class UserDataBase {
         }
         return false;
     }
-    
+    /**
+     * sets up the initial DB table call chess_players which stores all the 
+     * information about the user plus the game states
+     */
     protected void setupChessDB() {
         try {
             this.statement = conn.createStatement();
@@ -88,7 +97,13 @@ public final class UserDataBase {
             System.out.println(ex.getMessage());
         }
     }
-    
+    /**
+     * loads the user to the user class so the values can be accessed by 
+     * other classes
+     * @param userName
+     * @param password
+     * @return 
+     */
     protected User loadUser(String userName, String password)
     {
         User user =null;
@@ -106,7 +121,13 @@ public final class UserDataBase {
         }
         return user;
     }
-    
+    /**
+     * registers the user - writing to DB
+     * @param userName
+     * @param email
+     * @param password
+     * @return 
+     */
     protected boolean registerUser(String userName, String email, String password)
     {
         boolean registerSuccess = false;
@@ -127,7 +148,12 @@ public final class UserDataBase {
         }
         return registerSuccess;
     }
-    
+    /**
+     * logs in the user - reading from DB
+     * @param userName
+     * @param password
+     * @return 
+     */
     protected boolean loginUser(String userName, String password)
     {
         boolean loginSuccess = false;
@@ -144,7 +170,11 @@ public final class UserDataBase {
         }
         return loginSuccess;
     }
-    
+    /**
+     * writing to DB - updates the turn number to be used for loading 
+     * game purposes 
+     * @param user 
+     */
     protected void updateTurn(User user)
     {
         try {
@@ -153,7 +183,11 @@ public final class UserDataBase {
             System.out.println(ex.getMessage());
         }
     }
-    
+    /**
+     * reading from DB - gets the saved turns
+     * @param userName
+     * @return 
+     */
     protected int getTurn(String userName)
     {
         int turn = 0;
@@ -169,7 +203,10 @@ public final class UserDataBase {
         }
         return turn;
     }
-    
+    /**
+     * writing to DB - stores whether there was a game already saved
+     * @param user 
+     */
     protected void updateGameSaved(User user)
     {
         try {
@@ -178,7 +215,11 @@ public final class UserDataBase {
             System.out.println(ex.getMessage());
         }
     }
-    
+    /**
+     * reading from DB - gets whether there was a saved state
+     * @param userName
+     * @return 
+     */
     protected Boolean isGameSaved(String userName)
     {
         Boolean hasLoadedGame = true;
@@ -195,7 +236,10 @@ public final class UserDataBase {
         }
         return hasLoadedGame;
     }
-    
+    /**
+     * writing to DB - updates the score once the game is over
+     * @param user 
+     */
     protected void updateScore(User user)
     {
         try {
@@ -204,7 +248,11 @@ public final class UserDataBase {
             System.out.println(ex.getMessage());
         }
     }
-    
+    /**
+     * makes a new table corresponding to the users name which stores the 
+     * loaded game data
+     * @param username 
+     */
     protected void makeProgressTable(String username)
     {
         try {
@@ -220,7 +268,10 @@ public final class UserDataBase {
         }       
     }
     
-    
+    /**
+     * clears the loaded game data
+     * @param username 
+     */
     protected void clearGameProgress(String username)
     {
         try {
@@ -229,7 +280,13 @@ public final class UserDataBase {
             Logger.getLogger(UserDataBase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * writing to DB - adds the data to the earlier mentioned table
+     * @param username
+     * @param piece
+     * @param x
+     * @param y 
+     */
     protected void addGameProgress(String username, String piece, int x, int y)
     {
         try {
@@ -238,7 +295,11 @@ public final class UserDataBase {
             Logger.getLogger(UserDataBase.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * gets the piece data from table
+     * @param username
+     * @return 
+     */
     protected ArrayList<String> getStoredPiece(String username)
     {
         ArrayList<String> pieceValues = new ArrayList<>();
@@ -257,7 +318,11 @@ public final class UserDataBase {
         
         return pieceValues;
     }
-    
+    /**
+     * gets the x coordinate from the table
+     * @param username
+     * @return 
+     */
     protected ArrayList<Integer> getStoredX(String username)
     {
         ArrayList<Integer> xValues = new ArrayList<>();
@@ -275,7 +340,11 @@ public final class UserDataBase {
         
         return xValues;
     }
-    
+     /**
+     * gets the y coordinate from the table
+     * @param username
+     * @return 
+     */
     protected ArrayList<Integer> getStoredY(String username)
     {
         ArrayList<Integer> yValues = new ArrayList<>();
@@ -295,7 +364,11 @@ public final class UserDataBase {
         return yValues;
     }
     
-    
+    /**
+     * checks if the table already exists
+     * @param name
+     * @return 
+     */
     protected boolean checkExistedTable(String name) {
         boolean tableAlreadyExists = false;
         try {
@@ -319,7 +392,9 @@ public final class UserDataBase {
         
         return tableAlreadyExists;
     }
-    
+    /**
+     * closes connection
+     */
     protected void closeConnections() {
         if (conn != null) {
             try {

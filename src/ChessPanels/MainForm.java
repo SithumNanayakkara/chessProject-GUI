@@ -38,7 +38,9 @@ public class MainForm extends javax.swing.JFrame {
         setBackground();
         this.setVisible(true);
     }
-    
+    /**
+     * sets the chess background
+     */
     private void setBackground()
     {
         try {
@@ -47,29 +49,40 @@ public class MainForm extends javax.swing.JFrame {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * shows the login/register panel
+     */
     public void showCard1 ()
     {
         cardLayout.show(jPanel1,"1");
     }
-    
+    /**
+     * shows the game menu
+     */
     public void showCard2 ()
     {
         MPanel = new MenuPanel(this,processInfo);
         jPanel1.add(MPanel,"2");
         cardLayout.show(jPanel1,"2");
     }
-    
+    /**
+     * sets the users name in the menu page
+     * @param name 
+     */
     public void setMenuName(String name)
     {
         MPanel.welcomeName(name);
     }
-    
+    /**
+     * does the login
+     */
     public void doLogin ()
     {
         this.processInfo.doLogin();
     }
-    
+    /**
+     * does the register
+     */
     public void doRegister ()
     {
         this.processInfo.doRegister();

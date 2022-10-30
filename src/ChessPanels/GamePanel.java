@@ -30,6 +30,9 @@ public class GamePanel extends javax.swing.JPanel {
 
     /**
      * Creates new form GamePanel
+     * @param menu - menu panel instance
+     * @param info - processDataBase instance
+     * @param isnewgame
      */
     public GamePanel(MenuPanel menu, processDataBase info, boolean isnewgame) {
         initComponents();
@@ -38,7 +41,6 @@ public class GamePanel extends javax.swing.JPanel {
         this.chessBoard = new Board();
         this.pm = new ProcessMove();
         this.won = false;
-        
         this.isNewGame(isnewgame);
         pm.setColour();
         this.boardPanel = new BoardPanel(this,pm,chessBoard);
@@ -49,16 +51,10 @@ public class GamePanel extends javax.swing.JPanel {
         this.validate();
     }
     
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        GradientPaint gp = new GradientPaint(0, 0, colour1, 1920, 720, colour2);
-        g2d.setPaint(gp);
-        g2d.fillRect(0, 0, 1920, 720);
-    }
-    
+    /**
+     * checks if the user a already loaded game or is launching a new game
+     * @param isnewgame 
+     */
     private void isNewGame(boolean isnewgame)
     {
         if(isnewgame)
@@ -71,7 +67,9 @@ public class GamePanel extends javax.swing.JPanel {
             pm.setTurn(info.getTurn());
         }
     }
-    
+    /**
+     * updates the who moves information each round
+     */
     public void updateInfo ()
     {
         this.jPanel2.remove(turnsLabel);
@@ -89,7 +87,10 @@ public class GamePanel extends javax.swing.JPanel {
         this.jPanel2.validate();
         this.jPanel2.repaint();
     }
-    
+    /**
+     * updates the piece selection information/location provided next to the chess board after each click
+     * @param piece 
+     */
     public void updatePieceInfo(String piece)
     {
         String[] pieceSplit = pieces[0].split(" ",0);
@@ -116,21 +117,27 @@ public class GamePanel extends javax.swing.JPanel {
             pieces[1] = "";
         }
     }
-    
+    /**
+     * increases the score if white wins
+     */
     public void increaseScore()
     {
         this.info.getUser().setScore(this.info.getUser().getScore()+10);
     }
-    
+    /**
+     * decreases the score if black wins
+     */
     public void decreaseScore()
     {
         this.info.getUser().setScore(this.info.getUser().getScore()-10);
     }
-    
+    /**
+     * displays who wins
+     */
     public void displayWin()
     {
         this.jPanel2.remove(turnsLabel);
-        if(pm.getColour() == "Black")
+        if(pm.getColour().equals("Black"))
         {
             increaseScore();
             this.info.updateDB();
@@ -148,7 +155,9 @@ public class GamePanel extends javax.swing.JPanel {
         this.turnsLabel.validate();
         this.turnsLabel.repaint();
     }
-         
+    /**
+     * displays the score after winning or loosing
+     */ 
     public void displayScore()
     {
         this.jPanel2.remove(invalidMoveLabel);
@@ -164,12 +173,17 @@ public class GamePanel extends javax.swing.JPanel {
         this.invalidMoveLabel.validate();
         this.invalidMoveLabel.repaint();
     }
-    
+    /**
+     * loads the stored progress from the DB
+     */
     public void loadProgress()
     {
         info.getProgressTableInfo(chessBoard);
     }
-    
+    /**
+     * saves the location and the pieces on the board to the DB so the user 
+     * can load it back later
+     */
     public void saveProgress()
     {
         info.setClearProgress();
@@ -187,6 +201,17 @@ public class GamePanel extends javax.swing.JPanel {
         }
         System.out.println("Inserted progress into DB");
     }   
+    
+    //sets the gradient background
+    @Override
+    protected void paintComponent(Graphics graphic) {
+        super.paintComponent(graphic);
+        Graphics2D graphics = (Graphics2D) graphic;
+        graphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        GradientPaint gp = new GradientPaint(0, 0, colour1, 1920, 720, colour2);
+        graphics.setPaint(gp);
+        graphics.fillRect(0, 0, 1920, 720);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

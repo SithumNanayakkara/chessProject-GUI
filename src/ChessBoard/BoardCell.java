@@ -12,6 +12,7 @@ public class BoardCell
     private int yLocation;
     private Piece pieceIs; 
 
+    //constructor to initialises the x,y location and the piece
     public BoardCell(int xLocation, int yLocation, Piece piece) {
         this.xLocation = xLocation;
         this.yLocation = yLocation;
@@ -42,7 +43,7 @@ public class BoardCell
         this.pieceIs = piece;
     }
     
-         
+    //overriden toString for each piece
     @Override
     public String toString() 
     {

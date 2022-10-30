@@ -42,22 +42,17 @@ public class ProcessMove
         System.out.print("\nYour Input: ");
         return this.colour.toString();
     }
-    
-    /**
-     * sets the color for the correct turn
-     * @return 
-     */
-    
+    //sets the turn number from the DB
     public void setTurn(int turn)
     {
         this.turn = turn;
     }
-    
+    //gets the turn number for the DB
     public int getTurn()
     {
         return this.turn;
     }
-    
+    //sets the colour according to the turn
     public void setColour()
     {
         if(this.isWhite())
@@ -69,17 +64,20 @@ public class ProcessMove
             this.colour = Colour.Black;
         }
     }
-    
+    //gets the colour as a string
     public String getColour()
     {
         return this.colour.toString();
     }
-    
+    //gets the string of text for each invalid move performed
     public String getInvalidMove()
     {
         return invalidMove;
     }
-    
+    /** 
+     * checks if the winning condition has been met by calling 
+     * the isCheckmate method
+    */
     public boolean winningCondition ()
     {
         checkKing = new King(this.colour);
@@ -163,9 +161,6 @@ public class ProcessMove
         move.getInitialC().getPiece().setIsInitialMove(false);
         move.getFinalC().setPiece(move.getInitialC().getPiece());
         move.getInitialC().setPiece(null);
-        
-        //sotres the moves to show logs later on
-        //movesPlayed.add((turn+1)+" "+this.initalCoordinate + " " +this.initialPiece.toString() + " to " + this.finalCoordinate );
         
         this.turn++;
         setColour();

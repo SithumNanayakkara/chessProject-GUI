@@ -5,7 +5,6 @@
 package ChessInfo;
 
 import ChessBoard.Board;
-import ChessBoard.BoardCell;
 import ChessPanels.MainForm;
 import ChessPanels.SwitchLoginRegisterPanel;
 import javax.swing.JOptionPane;
@@ -19,17 +18,16 @@ public class processDataBase
     private final SwitchLoginRegisterPanel LRPanel;
     private final UserDataBase DBUser;
     private final MainForm form;
-    private BoardCell cell;
-    private Board board;
     private User user;
-    private boolean gameSaved;
 
     public processDataBase(SwitchLoginRegisterPanel panel, MainForm form) {
         this.LRPanel = panel;
         this.DBUser = UserDataBase.getInstance();
         this.form = form;
     }
-    
+    /**
+     * process the logged user
+     */
     public void doLogin ()
     {
         String userName = LRPanel.getLUsername();
@@ -58,7 +56,9 @@ public class processDataBase
         }
                 
     }
-    
+    /**
+     * process the registered user
+     */
     public void doRegister()
     {
         String userName = LRPanel.getRUsername();
@@ -99,17 +99,23 @@ public class processDataBase
             JOptionPane.showMessageDialog(LRPanel,"All fields must be filled, please try again!","Error",JOptionPane.PLAIN_MESSAGE);
         }
     }
-    
+    /**
+     * set method for the clear progress method in 
+     */
     public void setClearProgress()
     {
         this.DBUser.clearGameProgress(user.getUserName());
     }
-    
+    /**
+     * adding data method for the progress table method in DB
+     */
     public void setProgressTableInfo(String piece, int x, int y)
     {
         this.DBUser.addGameProgress(user.getUserName(), piece, x, y);
     }
-    
+    /**
+     * getting data method for the progress table method in DB
+     */
     public void getProgressTableInfo(Board board)
     {
         int count = 0;
@@ -125,34 +131,51 @@ public class processDataBase
            }
         } 
     }
-    
+    /**
+     * sets the turns to the DB
+     * @param whiteMoves 
+     */
     public void setTurn(int whiteMoves)
     {
         this.user.setTurn(whiteMoves);
         this.DBUser.updateTurn(user);
     }
-    
+    /**
+     * gets the turns from the DB
+     * @return 
+     */
     public int getTurn()
     {
          return this.DBUser.getTurn(user.getUserName());
     }
-    
+    /**
+     * sets the game saved state to the DB
+     * @param gameSaved 
+     */
     public void setGameSaved(Boolean gameSaved)
     {
         this.user.setGameLoaded(gameSaved);
         this.DBUser.updateGameSaved(user);
     }
-    
+    /**
+     * gets the game saved state from the DB
+     * @return 
+     */
     public boolean isGameSaved()
     {
          return this.DBUser.isGameSaved(user.getUserName());
     }
-
+    /**
+     * updates the user info in the DB
+     */
     public void updateDB()
     {
         this.DBUser.updateScore(this.user);
     }
-    
+    /**
+     * gets the user instance
+     * @return 
+     */
     public User getUser()
     {
         return user;

@@ -4,13 +4,10 @@
  */
 package ChessPanels;
 
-import ChessInfo.processDataBase;
 import ChessCommon.MovePiece;
 import ChessBoard.Board;
 import ChessCommon.ProcessMove;
 import java.awt.Dimension;
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +15,6 @@ import java.util.ArrayList;
  */
 public class BoardPanel extends javax.swing.JPanel {
   
-    //final List<BoardTiles> tiles;
     private final Board chessBoard;
     private final MovePiece movePiece;
     private final GamePanel gamePanel;
@@ -26,13 +22,12 @@ public class BoardPanel extends javax.swing.JPanel {
     
     /**
      * Creates new form GamePanel
-     * @param gp
-     * @param pm
-     * @param cb
+     * @param gp - GamePanel instance
+     * @param pm - ProcessMove instance
+     * @param cb - Board instance
      */
     public BoardPanel(GamePanel gp, ProcessMove pm, Board cb) {
         initComponents();
-        //this.tiles = new ArrayList<>();
         this.movePiece = new MovePiece(pm,this,gp,cb);
         this.chessBoard = cb;
         this.gamePanel = gp;
@@ -42,7 +37,9 @@ public class BoardPanel extends javax.swing.JPanel {
         this.validate( );
     }
     
-
+    /**
+     * creates and adds 64 panels inside the BoardPanel JPanel
+     */
     public final void createPanels()
     {
         this.removeAll();
@@ -52,7 +49,6 @@ public class BoardPanel extends javax.swing.JPanel {
             {
                 final BoardTiles tilePanel = new BoardTiles(this,c,r,movePiece, chessBoard, gamePanel);
                 this.add(tilePanel);
-                //this.tiles.add(tilePanel);
             }
         }
         this.validate();

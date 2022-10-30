@@ -40,7 +40,7 @@ public class GameRules
      * 
      * Checks if the piece is traveling up, down or left right and gets the distance between the move
      */
-    public void movePath ()
+    private void movePath ()
     {
         int xDistance = this.x2-this.x1;//finalRank - initialRank;
         int yDistance = this.y2-this.y1;//finalFile - initialFile;

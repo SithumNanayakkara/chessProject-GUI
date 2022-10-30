@@ -6,21 +6,28 @@ package ChessInfo;
  */
 public class User 
 {
+    private boolean gameLoaded;
     private String userName;
     private String Password;
     private String email;
     private int score;
-    private boolean gameLoaded;
-    //private boolean whitesTurn;
     private int turn;
 
+    /**
+     * 
+     * @param userName - from the DB
+     * @param Password - from the DB
+     * @param email - from the DB
+     * @param score - from the DB
+     * @param gameLoaded - from the DB
+     * @param turn  - from the DB
+     */
     public User(String userName, String Password, String email, int score, boolean gameLoaded, int turn) {
         this.userName = userName;
         this.Password = Password;
         this.email = email;
         this.score = score;
         this.gameLoaded = gameLoaded;
-        //this.whitesTurn = whiteTurn;
         this.turn = turn;
     }
 
@@ -77,11 +84,4 @@ public class User
         this.turn = turn;
     }
 
-//    public boolean isWhitesTurn() {
-//        return whitesTurn;
-//    }
-//
-//    public void setWhitesTurn(boolean whiteTurn) {
-//        this.whitesTurn = whiteTurn;
-//    }
 }

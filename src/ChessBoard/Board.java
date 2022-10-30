@@ -6,7 +6,6 @@ import ChessPiece.Queen;
 import ChessPiece.King;
 import ChessPiece.Bishop;
 import ChessPiece.Knight;
-import ChessPiece.Piece;
 import ChessPiece.Rook;
 
 /**
@@ -22,14 +21,12 @@ public class Board
     public Board()
     {
        cells = new BoardCell [8] [8];
-       //setup();
     }
     /**
      * adds pieces to the array
      */
     public void setup()
     {
-        
         cells [0][0] = new BoardCell(0,0, new Rook(Colour.Black));
         cells [0][1] = new BoardCell(0,1, new Knight(Colour.Black));
         cells [0][2] = new BoardCell(0,2, new Bishop(Colour.Black));
@@ -71,7 +68,10 @@ public class Board
         }
     }
     /**
-     * adds pieces to the array
+     * Check the piece data from the data base and sets the piece on the array accordingly
+     * @param piece - piece string from database
+     * @param x - x value from data base
+     * @param y - y value from data base
      */
     public void loadSavedCells(String piece,int x ,int y)
     {
@@ -120,58 +120,23 @@ public class Board
     }
     /**
      * gets the cell coordinates
-     * @param x
-     * @param y
+     * @param x - location
+     * @param y - location
      * @return 
      */
     public BoardCell getCell(int x, int y)
     {
         return cells[x][y];
     }
-
+    //gets the boardcell array
     public BoardCell[][] getCells()
     {
         return cells;
     }
-
+    //sets the BoardCell 2d array
     public static void setCells(BoardCell[][] cells)
     {
         Board.cells = cells;
     }
-    
-    /**
-     * prints the board
-     */
-    public void printBoard()
-    {
-        int count =1;
-        System.out.println("\n           Chess Board");
-        System.out.println("           ===========");
-        System.out.println("    A    B   C    D    E   F    G    H");
-        System.out.println(" + — — — — — — — — — — — +");
-        for(int i = 7; i>=0; i--)
-        {
-            System.out.print(count + "｜");
-            
-            for(int j = 0; j<8; j++)
-            {
-                BoardCell emptyCells = cells[i][j];
-                
-                
-                if(emptyCells.getPiece() == null)
-                {
-                    System.out.printf(" %s ",emptyCells);
-                }
-                else
-                {
-                    System.out.printf(" %s ",emptyCells.getPiece().toString());
-                }    
-            }
-            System.out.print("｜" + count);
-            System.out.println();
-            count++;
-        }
-        System.out.println(" + — — — — — — — — — — — +");
-        System.out.println("    A    B   C    D    E   F    G    H");
-    }
+  
 }

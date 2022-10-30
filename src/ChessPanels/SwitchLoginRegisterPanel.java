@@ -31,8 +31,6 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         this.register = new RegisterPanel();
         this.login = new LoginPanel();
         this.form = form;
-        //this.processInfo = new processUserInfo(this,form);
-        //this.DBUser = DBUserInfo.getInstance();
         
         setupCard();
     }
@@ -89,7 +87,9 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
         add(jPanel1);
         jPanel1.setBounds(0, 0, 1280, 720);
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * adds the register and login panels to a card layout
+     */
     private void setupCard()
     {
         jPanel2.add(register,"register");
@@ -138,7 +138,9 @@ public class SwitchLoginRegisterPanel extends javax.swing.JPanel {
     {
         form.setMenuName(name);
     }
-    
+    /**
+     * all the action listeners from the login panel and the register panel
+     */
     public void actions ()
     {
         this.login.getBtnBackToRegister().addActionListener((ActionEvent e) -> {

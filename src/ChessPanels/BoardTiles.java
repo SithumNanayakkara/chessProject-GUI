@@ -6,13 +6,10 @@ package ChessPanels;
 
 import ChessCommon.MovePiece;
 import ChessBoard.Board;
-import ChessCommon.ProcessMove;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import static javax.swing.SwingUtilities.isLeftMouseButton;
-import static javax.swing.SwingUtilities.isRightMouseButton;
 
 /**
  *
@@ -20,27 +17,23 @@ import static javax.swing.SwingUtilities.isRightMouseButton;
  */
 public class BoardTiles extends javax.swing.JPanel {
     
-    private final static Dimension GAMEBOARD_TILE_DIMENSION = new Dimension(90,90);
-    
-    //private ProcessCoordinates coordinates;
     private final Color colour1 = new java.awt.Color(204,255,255);
     private final Color colour2 = new java.awt.Color(0,102,102);
     
     private final Board board;
     private final MovePiece move;
     private final GamePanel gamePanel;
-    //private final BoardPanel boardPanel;
     
     private final int tileCol;
     private final int tileRow;
     /**
-     * Creates new form NewJPanel
-     * @param panels
-     * @param tileCol
-     * @param tileRow
-     * @param mp
-     * @param cb
-     * @param gp
+     * initialises all the instances and sets the tile colour and the piece
+     * @param panels - BoardPanel instance
+     * @param tileCol - column number
+     * @param tileRow - row number
+     * @param mp - MovePiece instance
+     * @param cb - Board instance
+     * @param gp - GamePanel instance
      */
     public BoardTiles(BoardPanel panels,int tileCol, int tileRow, MovePiece mp , Board cb, GamePanel gp) {
         initComponents();
@@ -53,7 +46,10 @@ public class BoardTiles extends javax.swing.JPanel {
         setPiece();
         validate();
     }
-    
+    /**
+     * sets the piece by comparing the toString of the piece and the file
+     * name of a png and sets the image on the tile if they match
+     */
     private void setPiece()
     {
         this.removeAll();
@@ -65,11 +61,11 @@ public class BoardTiles extends javax.swing.JPanel {
         this.validate();
         this.repaint();
     }
-    
-    
+    /**
+     * gives all the tiles a color depending on the location
+     */
     private void tileColour() 
     {
-        
         if(tileRow %2 ==0)
         {
             if(tileCol %2 ==0)
@@ -91,8 +87,6 @@ public class BoardTiles extends javax.swing.JPanel {
            
     }
     
-
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -105,7 +99,11 @@ public class BoardTiles extends javax.swing.JPanel {
         });
         setLayout(new java.awt.GridBagLayout());
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * uses a mouse listener on the tilePanel to listen for clicks on each tile 
+     * and send the location of the mouse click to be further processed
+     * @param evt 
+     */
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
 
         String piece;

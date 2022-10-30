@@ -27,6 +27,7 @@ public class MovePiece{
     private Integer finalYCoordinate;
     private boolean gameOver;
     
+    //constructor to initialise the ProcessMove, BoardPanel, GamePanel, and Board instances
     public MovePiece(ProcessMove pMove, BoardPanel bPanel, GamePanel gPanel, Board cb) 
     {
        this.gameOver = false;
@@ -40,7 +41,14 @@ public class MovePiece{
        this.finalYCoordinate = null;
     }
 
-    
+    /**
+     * checks if the mouse click was the left or right mouse button and sets up 
+     * the coordinates to be processed
+     * @param tileCol - column number of the tile
+     * @param tileRow - row number of the tile
+     * @param event - mouse event listener
+     * @param tile - tile instance
+     */
     
     public void getMove(int tileCol, int tileRow, java.awt.event.MouseEvent event, BoardTiles tile)
     {
@@ -72,7 +80,15 @@ public class MovePiece{
         }
 
     }
-    
+    /**
+     * checks if the game is over, if not it checks if the winning condition has
+     * reached (either players have been checkmated) if not true it will proceed
+     * to process the move setup by the earlier method. Once the move has been 
+     * performed it checks if the winning condition was met again before exiting
+     * if winning condition is met, the GUI will update to show who won and the 
+     * score will also be updated
+     * @param tile 
+     */
     public void doMove(BoardTiles tile)
     { 
         if(!gameOver)
@@ -92,7 +108,9 @@ public class MovePiece{
             }
         }
     }
-    
+    /**
+     * clears all values set by the mouse listener
+     */
     public void clearValues()
     {
         this.initialXCoordinate = null;

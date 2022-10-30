@@ -121,7 +121,7 @@ public class PawnTest {
      */
     @Test
     public void testToStringBlack() {
-        System.out.println("Pawn toString White");
+        System.out.println("Pawn toString Black");
         Pawn instance = new Pawn (Colour.Black);
         String expResult = "Black Pawn";
         String result = instance.toString();
